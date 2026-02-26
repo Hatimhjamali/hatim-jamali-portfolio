@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Whiteout Survival Breakdown — Hatim Jamali</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.doc-hero {
+  padding: 4rem 2.5rem 2rem; max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;
+}
+.doc-back {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  color: var(--text2); text-decoration: none; letter-spacing: 0.12em;
+  display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;
+  transition: color 0.2s;
+}
+.doc-back:hover { color: var(--cyan); }
+.doc-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; color: var(--white); letter-spacing: 0.04em; }
+.doc-sub { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--cyan2); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.4rem; }
+.doc-icon { font-size: 4rem; opacity: 0.8; }
+
+/* META STRIP */
+.meta-strip {
+  display: flex; gap: 1px; background: var(--border);
+  border: 1px solid var(--border); max-width: 1200px; margin: 0 auto;
+}
+.meta-cell {
+  flex: 1; padding: 1rem 1.2rem; background: var(--panel);
+}
+.meta-label { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.meta-val { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--white); letter-spacing: 0.04em; }
+
+/* DOC LAYOUT */
+.doc-layout {
+  display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; margin-top: 1rem;
+}
+.doc-main { display: flex; flex-direction: column; gap: 2rem; }
+.doc-sidebar { display: flex; flex-direction: column; gap: 1.2rem; position: sticky; top: 80px; }
+
+/* CONTENT BLOCKS */
+.doc-block {
+  background: var(--panel); border: 1px solid var(--border); overflow: hidden;
+}
+.block-header {
+  padding: 0.9rem 1.4rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.8rem;
+  background: var(--panel2);
+}
+.block-icon { font-size: 1rem; }
+.block-title { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); letter-spacing: 0.08em; }
+.block-body { padding: 1.4rem; }
+.block-body p { font-size: 0.88rem; line-height: 1.8; color: var(--text2); margin-bottom: 0.8rem; }
+.block-body p:last-child { margin-bottom: 0; }
+.block-body strong { color: var(--text); }
+
+/* LOOP VISUALIZER */
+.loop-visual {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  padding: 1rem 1.4rem; background: var(--bg2); border-top: 1px solid var(--border);
+}
+.loop-node {
+  padding: 0.4rem 0.8rem; border: 1px solid var(--border2); background: var(--panel);
+  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; color: var(--text2); letter-spacing: 0.08em;
+}
+.loop-node.highlight { border-color: var(--cyan); color: var(--cyan); background: rgba(0,200,255,0.06); }
+.loop-arr { color: var(--cyan2); font-size: 0.7rem; }
+
+/* INSIGHT LIST */
+.insight-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.insight-entry {
+  padding: 0.9rem 1rem; border: 1px solid var(--border);
+  background: var(--bg2); border-left: 3px solid var(--cyan2);
+  display: flex; gap: 0.8rem; align-items: flex-start;
+}
+.insight-entry.gold { border-left-color: var(--gold); }
+.insight-entry.red { border-left-color: var(--red); }
+.insight-num { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--cyan2); flex-shrink: 0; margin-top: 0.15rem; }
+.insight-text { font-size: 0.85rem; line-height: 1.65; color: var(--text2); }
+.insight-text strong { color: var(--text); }
+
+/* SIDEBAR WIDGETS */
+.sidebar-card { background: var(--panel); border: 1px solid var(--border); }
+.sidebar-header { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); background: var(--panel2); font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--cyan); letter-spacing: 0.15em; text-transform: uppercase; }
+.sidebar-body { padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.sidebar-item { font-size: 0.8rem; color: var(--text2); line-height: 1.5; padding: 0.4rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; }
+.sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
+.sidebar-item::before { content: '▸'; color: var(--cyan2); flex-shrink: 0; }
+.rating-row { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; }
+.rating-label { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--text3); letter-spacing: 0.1em; }
+.rating-dots { display: flex; gap: 3px; }
+
+@media(max-width:900px){
+  .doc-layout{grid-template-columns:1fr}
+  .doc-sidebar{position:static}
+}
+@media(max-width:720px){
+  .doc-hero{padding:2.5rem 1.5rem 1.5rem}
+  .meta-strip{flex-wrap:wrap}
+  .meta-cell{flex:1 1 40%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<div class="doc-hero">
+  <div>
+    <a href="breakdowns.html" class="doc-back">← BACK TO BREAKDOWNS</a>
+    <div class="doc-title">WHITEOUT SURVIVAL</div>
+    <div class="doc-sub">Monetization & Player Psychology Analysis</div>
+  </div>
+  <div class="doc-icon">🏔️</div>
+</div>
+
+<div class="meta-strip">
+  <div class="meta-cell"><div class="meta-label">Developer</div><div class="meta-val">Century Games</div></div>
+  <div class="meta-cell"><div class="meta-label">Genre</div><div class="meta-val">Midcore Strategy</div></div>
+  <div class="meta-cell"><div class="meta-label">Platform</div><div class="meta-val">Mobile</div></div>
+  <div class="meta-cell"><div class="meta-label">Analysis Focus</div><div class="meta-val">Monetization Systems</div></div>
+</div>
+
+<div class="divider"></div>
+
+<section class="page-wrap">
+  <div class="doc-layout">
+    <div class="doc-main">
+
+      <!-- Overview -->
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">📋</span><span class="block-title">GAME OVERVIEW</span></div>
+        <div class="block-body">
+          <p>Whiteout Survival is a <strong>midcore mobile strategy game</strong> developed by Century Games. The core gameplay revolves around managing a frozen settlement, gathering resources, upgrading infrastructure, recruiting heroes, and increasing overall settlement power.</p>
+          <p>The central progression fantasy is based on <strong>survival and rebuilding civilisation</strong> in a hostile frozen environment. The player assumes the role of a leader responsible for expanding and strengthening their city.</p>
+          <p>Unlike traditional strategy games that emphasise combat depth early, Whiteout Survival places stronger emphasis on <strong>progression pacing and infrastructure growth</strong> as the primary driver of engagement.</p>
+        </div>
+        <div class="loop-visual">
+          <span class="loop-node highlight">Collect Resources</span><span class="loop-arr">→</span>
+          <span class="loop-node">Upgrade Furnace</span><span class="loop-arr">→</span>
+          <span class="loop-node highlight">Increase Power</span><span class="loop-arr">→</span>
+          <span class="loop-node">Unlock Systems</span><span class="loop-arr">→</span>
+          <span class="loop-node highlight">Repeat</span>
+        </div>
+      </div>
+
+      <!-- Monetization System 1 -->
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">💎</span><span class="block-title">SYSTEM 1 — PREMIUM CURRENCY CONDITIONING</span></div>
+        <div class="block-body">
+          <p>One of the most significant monetisation systems is the strategic use of premium currency, referred to as <strong>Gems</strong>.</p>
+          <p>During the early progression phase, the game provided approximately <strong>2,000–2,500 Gems</strong> through tutorial rewards and early achievements. At this stage, upgrade speed-ups required very small amounts — typically 5–10 Gems — creating a psychological environment where premium currency usage felt inexpensive and efficient.</p>
+          <p>This system encouraged frequent use of Gems to bypass waiting periods, even when the remaining upgrade time was only 1–5 minutes. This establishes a critical behavioural pattern: <strong>the player becomes conditioned to using premium currency as a normal solution to progression friction.</strong></p>
+          <p>However, as progression continued, upgrade timers increased significantly, and the Gem cost required increased proportionally. Later upgrades required <strong>several hundred Gems</strong> to complete instantly. Players who had become accustomed to bypassing friction now felt pressure to acquire additional Gems through real-money purchases.</p>
+        </div>
+      </div>
+
+      <!-- System 2 -->
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">🔨</span><span class="block-title">SYSTEM 2 — BUILDER LIMITATION</span></div>
+        <div class="block-body">
+          <p>A core progression limitation is the restriction allowing <strong>only one construction upgrade at a time</strong>. Each building upgrade required exclusive use of the single available builder, creating a system of enforced sequential progression where players cannot upgrade multiple buildings simultaneously.</p>
+          <p>Players were presented with two options: wait for the builder to become available, or use Gems to accelerate the upgrade. Because many progression requirements depended on completing multiple prerequisite upgrades, this builder limitation became the <strong>primary structural bottleneck</strong> controlling progression speed.</p>
+          <p>The design purpose of this system is to introduce <strong>consistent progression friction that can be bypassed through monetisation</strong> — not to block content, but to sell time.</p>
+        </div>
+      </div>
+
+      <!-- System 3 -->
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">⚔️</span><span class="block-title">SYSTEM 3 — HERO RECRUITMENT</span></div>
+        <div class="block-body">
+          <p>The Hero system was introduced after unlocking the combat system. Heroes function as <strong>persistent, upgradeable characters</strong> that contribute to combat effectiveness and overall settlement power.</p>
+          <p>Heroes were unlocked through a recruitment system that required recruitment keys. Players were initially provided with free keys. Once exhausted, players were presented with monetisation offers allowing additional key purchases through paid bundles.</p>
+          <p>This system leverages <strong>collection psychology</strong> — players feel motivated to expand and strengthen their hero roster, creating sustained spending incentive beyond base progression.</p>
+        </div>
+      </div>
+
+      <!-- Frontloaded Progression -->
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">📈</span><span class="block-title">FRONTLOADED PROGRESSION & FURNACE SYSTEM</span></div>
+        <div class="block-body">
+          <p>During early gameplay, resource availability significantly exceeded upgrade requirements. Players received approximately <strong>50,000 wood while upgrades required only 5,000–10,000</strong>. This allowed rapid progression during early Furnace levels, with Furnace Level 7 achievable within approximately two days of moderate gameplay.</p>
+          <p>This design pattern — <strong>frontloaded progression</strong> — creates early momentum and increases player investment, making players more likely to continue playing and eventually encounter monetisation systems.</p>
+          <p>The Furnace functions as the <strong>central progression anchor</strong> of the game. Each Furnace upgrade unlocks new buildings, systems, and progression opportunities. This centralised structure allows designers to precisely control progression friction and monetisation pressure.</p>
+        </div>
+      </div>
+
+      <!-- Market Context -->
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">🌍</span><span class="block-title">MARKET CONTEXT — INDIA & UPI</span></div>
+        <div class="block-body">
+          <p>The availability of UPI significantly reduces payment friction. Premium currency purchases can be completed instantly, reducing the delay between purchase intent and purchase completion — which directly <strong>increases impulse purchase likelihood</strong>.</p>
+          <p>According to the Lumikai State of India Gaming Report, <strong>148 million users make in-game purchases</strong>, with millions of new paying players added annually. In-app purchases, propelled by mid-core games, grew significantly year-on-year. This confirms that midcore games such as Whiteout Survival are major drivers of mobile gaming revenue growth.</p>
+        </div>
+      </div>
+
+      <!-- Key Insights -->
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">💡</span><span class="block-title">KEY DESIGN INSIGHTS</span></div>
+        <div class="block-body">
+          <div class="insight-list">
+            <div class="insight-entry"><span class="insight-num">01</span><span class="insight-text"><strong>Condition before monetise.</strong> Flooding players with cheap premium currency early builds spending habits before costs escalate.</span></div>
+            <div class="insight-entry gold"><span class="insight-num">02</span><span class="insight-text"><strong>Monetise impatience, not access.</strong> The game never blocks content — it just makes waiting uncomfortable enough to pay to skip.</span></div>
+            <div class="insight-entry"><span class="insight-num">03</span><span class="insight-text"><strong>Frontloaded progression creates investment.</strong> Fast early progress gets players emotionally invested before the slow-down hits.</span></div>
+            <div class="insight-entry red"><span class="insight-num">04</span><span class="insight-text"><strong>Single builder = single bottleneck.</strong> Constraining one resource forces a clear, singular monetisation decision point.</span></div>
+            <div class="insight-entry gold"><span class="insight-num">05</span><span class="insight-text"><strong>Hero collection drives sustained spending.</strong> Base progression is finite — hero collecting extends the monetisation runway indefinitely.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="doc-sidebar">
+      <div class="sidebar-card reveal">
+        <div class="sidebar-header">Monetization Rating</div>
+        <div class="sidebar-body">
+          <div class="rating-row"><span class="rating-label">Aggression</span><div class="rating-dots"><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot"></span></div></div>
+          <div class="rating-row"><span class="rating-label">Fairness</span><div class="rating-dots"><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot"></span><span class="dot"></span></div></div>
+          <div class="rating-row"><span class="rating-label">Cleverness</span><div class="rating-dots"><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span></div></div>
+          <div class="rating-row"><span class="rating-label">Player Trust</span><div class="rating-dots"><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot"></span><span class="dot"></span></div></div>
+        </div>
+      </div>
+      <div class="sidebar-card reveal">
+        <div class="sidebar-header">Systems Covered</div>
+        <div class="sidebar-body">
+          <div class="sidebar-item">Premium Currency Conditioning</div>
+          <div class="sidebar-item">Speed-Up Monetisation</div>
+          <div class="sidebar-item">Builder Limitation Design</div>
+          <div class="sidebar-item">Hero Recruitment & Gacha</div>
+          <div class="sidebar-item">Frontloaded Progression</div>
+          <div class="sidebar-item">Furnace Anchor System</div>
+          <div class="sidebar-item">Seasonal Retention Loops</div>
+          <div class="sidebar-item">UPI Payment Friction</div>
+        </div>
+      </div>
+      <div class="sidebar-card reveal">
+        <div class="sidebar-header">Other Breakdowns</div>
+        <div class="sidebar-body">
+          <a href="breakdown-coc.html" class="sidebar-item" style="text-decoration:none; color:var(--text2); transition:color 0.2s; cursor:pointer;">⚔️ Clash of Clans</a>
+          <a href="breakdown-cod.html" class="sidebar-item" style="text-decoration:none; color:var(--text2); transition:color 0.2s; cursor:pointer;">🎯 Call of Duty: Mobile</a>
+          <a href="breakdown-silk.html" class="sidebar-item" style="text-decoration:none; color:var(--gold); transition:color 0.2s; cursor:pointer;">★ Silk Empire GDD</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">©2025 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

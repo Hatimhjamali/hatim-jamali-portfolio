@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Projects — Hatim Jamali</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.page-hero{padding:4rem 2.5rem 2rem;max-width:1200px;margin:0 auto}
+.page-hero-label{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:0.2em;text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.page-hero-label::before{content:'';width:24px;height:1px;background:var(--cyan)}
+.page-hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--white);letter-spacing:0.05em;margin-bottom:0.8rem}
+.page-hero p{font-size:0.95rem;color:var(--text2);max-width:560px;line-height:1.75}
+
+/* PROJECT CARDS */
+.proj-list{display:flex;flex-direction:column;gap:2rem;margin-top:1rem}
+
+.proj-card{background:var(--panel);border:1px solid var(--border);overflow:hidden;transition:border-color 0.3s}
+.proj-card:hover{border-color:var(--border2)}
+
+.proj-card-inner{display:grid;grid-template-columns:1fr 1fr;min-height:340px}
+.proj-card-inner.reverse{direction:rtl}
+.proj-card-inner.reverse > *{direction:ltr}
+
+.proj-media{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:0}
+.proj-card-inner.reverse .proj-media{border-right:none;border-left:1px solid var(--border)}
+
+/* VIDEO EMBED */
+.vid-frame{
+  width:100%; aspect-ratio:16/9;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+  position:relative;overflow:hidden;
+}
+.vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.vid-placeholder{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;
+  background:var(--bg2); cursor:pointer; transition:background 0.2s;
+}
+.vid-placeholder:hover{background:var(--panel2)}
+.vid-play{width:52px;height:52px;border-radius:50%;border:2px solid var(--cyan2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--cyan);transition:all 0.2s}
+.vid-placeholder:hover .vid-play{background:rgba(0,200,255,0.1);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,200,255,0.2)}
+.vid-label{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase}
+
+.thumb-row{display:flex;gap:1px;background:var(--border)}
+.thumb{flex:1;aspect-ratio:16/9;background:var(--bg);overflow:hidden;cursor:pointer;transition:opacity 0.2s}
+.thumb:hover{opacity:0.8}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;opacity:0.3;background:var(--bg2)}
+
+/* INFO SIDE */
+.proj-info{padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.proj-num{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text3);letter-spacing:0.15em}
+.proj-icon-title{display:flex;align-items:center;gap:0.8rem}
+.proj-game-icon{font-size:1.8rem}
+.proj-title{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;color:var(--white);letter-spacing:0.04em}
+.proj-genre{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.4rem}
+.proj-genre::before{content:'';width:8px;height:1px;background:var(--cyan2);display:inline-block}
+.proj-desc{font-size:0.87rem;color:var(--text2);line-height:1.75;flex:1}
+.proj-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.chip{font-family:'Share Tech Mono',monospace;font-size:0.58rem;padding:0.2rem 0.55rem;border:1px solid var(--border);color:var(--text3);background:var(--bg2);letter-spacing:0.07em}
+.proj-roles{display:flex;flex-direction:column;gap:0.3rem}
+.role-item{font-size:0.8rem;color:var(--text2);display:flex;gap:0.5rem;align-items:flex-start}
+.role-item::before{content:'▸';color:var(--cyan2);flex-shrink:0}
+.proj-btns{display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:auto}
+
+/* BOARD GAME CARD - simpler layout */
+.proj-card.board .proj-card-inner{grid-template-columns:1fr}
+.proj-card.board .proj-info{padding:2rem}
+.board-images{display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:0.5rem}
+.board-img{width:100px;height:140px;object-fit:cover;border:1px solid var(--border);background:var(--bg2)}
+
+@media(max-width:900px){
+  .proj-card-inner{grid-template-columns:1fr}
+  .proj-card-inner.reverse{direction:ltr}
+  .proj-media{border-right:none;border-bottom:1px solid var(--border)}
+  .proj-card-inner.reverse .proj-media{border-left:none;border-bottom:1px solid var(--border)}
+}
+@media(max-width:720px){.page-hero{padding:2.5rem 1.5rem 1.5rem}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-label">Worked-On Games</div>
+  <h1>PROJECTS</h1>
+  <p>Games I designed, prototyped, and iterated on — from networked multiplayer shooters to board games.</p>
+</div>
+
+<div class="divider"></div>
+
+<section class="page-wrap">
+  <div class="proj-list">
+
+    <!-- KILLSHOT -->
+    <div class="proj-card reveal">
+      <div class="proj-card-inner">
+        <div class="proj-media">
+          <div class="vid-frame">
+            <!-- REPLACE src WITH YOUR GOOGLE DRIVE EMBED LINK FOR KILLSHOT -->
+            <!-- Example: <iframe src="https://drive.google.com/file/d/YOUR_FILE_ID/preview" allowfullscreen></iframe> -->
+            <div class="vid-placeholder">
+              <div class="vid-play">▶</div>
+              <div class="vid-label">Game Overview</div>
+            </div>
+          </div>
+          <div class="thumb-row">
+            <div class="thumb"><div class="thumb-ph">🎬</div></div>
+            <div class="thumb"><div class="thumb-ph">🎬</div></div>
+            <div class="thumb"><div class="thumb-ph">🎬</div></div>
+          </div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-num">PROJECT · 001</div>
+          <div class="proj-icon-title">
+            <span class="proj-game-icon">🔫</span>
+            <span class="proj-title">KILLSHOT</span>
+          </div>
+          <div class="proj-genre">Unreal Engine · Multiplayer Shooter · 5v5</div>
+          <p class="proj-desc">A multiplayer co-op 5v5 shooter built in Unreal Engine with full networked multiplayer capabilities. The game features team-based combat in designed maps with balanced roles and competitive gameplay mechanics.</p>
+          <div class="proj-roles">
+            <div class="role-item">Designed game concept and core mechanics</div>
+            <div class="role-item">Helped balance gameplay systems</div>
+            <div class="role-item">Created and refined interactive prototypes</div>
+            <div class="role-item">Designed and refined the multiplayer map</div>
+          </div>
+          <div class="proj-chips">
+            <span class="chip">Unreal Engine</span>
+            <span class="chip">Multiplayer</span>
+            <span class="chip">Level Design</span>
+            <span class="chip">Systems Design</span>
+            <span class="chip">Balance</span>
+          </div>
+          <div class="proj-btns">
+            <a href="https://drive.google.com/drive/folders/1k1Ovnd0KFGGautkXuqEFCCIgaFuzItoY" target="_blank" class="btn btn-primary">▶ VIEW FOOTAGE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D SPACE SHOOTER -->
+    <div class="proj-card reveal">
+      <div class="proj-card-inner reverse">
+        <div class="proj-media">
+          <div class="vid-frame">
+            <!-- REPLACE WITH YOUR GOOGLE DRIVE EMBED LINK FOR SPACE SHOOTER -->
+            <div class="vid-placeholder">
+              <div class="vid-play">▶</div>
+              <div class="vid-label">Gameplay Demo</div>
+            </div>
+          </div>
+          <div class="thumb-row">
+            <div class="thumb"><div class="thumb-ph">🎬</div></div>
+            <div class="thumb"><div class="thumb-ph">🎬</div></div>
+            <div class="thumb"><div class="thumb-ph">🎬</div></div>
+          </div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-num">PROJECT · 002</div>
+          <div class="proj-icon-title">
+            <span class="proj-game-icon">🚀</span>
+            <span class="proj-title">3D SPACE SHOOTER</span>
+          </div>
+          <div class="proj-genre">Unity · Single Player · Zero-Gravity</div>
+          <p class="proj-desc">A zero-gravity space shooter where players navigate freely in all directions, engaging in intense dogfights with intelligent AI enemies. Strategic movement, weapon switching, and evasion are all key — survival depends on skillful control and quick decision-making.</p>
+          <div class="proj-roles">
+            <div class="role-item">Full game design and prototyping</div>
+            <div class="role-item">Level design and spatial layout</div>
+            <div class="role-item">UI design and player feedback systems</div>
+            <div class="role-item">Sound design</div>
+            <div class="role-item">Multiple iteration cycles based on playtesting</div>
+          </div>
+          <div class="proj-chips">
+            <span class="chip">Unity</span>
+            <span class="chip">AI Design</span>
+            <span class="chip">UI/UX</span>
+            <span class="chip">Sound Design</span>
+            <span class="chip">Iteration</span>
+          </div>
+          <div class="proj-btns">
+            <a href="https://drive.google.com/drive/folders/1s36arDfjTm2v4eM6Yg0yhsvnq60FmyUH" target="_blank" class="btn btn-primary">▶ VIEW FOOTAGE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHIPELAGO -->
+    <div class="proj-card board reveal">
+      <div class="proj-card-inner">
+        <div class="proj-info">
+          <div class="proj-num">PROJECT · 003</div>
+          <div class="proj-icon-title">
+            <span class="proj-game-icon">🗺️</span>
+            <span class="proj-title">ARCHIPELAGO</span>
+          </div>
+          <div class="proj-genre">Tabletop · Board Game · Conquest</div>
+          <p class="proj-desc">A board game inspired by Risk and Catan — adding my own creative spin to the conquest boardgame genre. Players compete for territory control using resources, strategy, and timing. The game blends the area control of Risk with the resource trading of Catan into a fresh competitive format.</p>
+          <div class="proj-roles">
+            <div class="role-item">Designed game rules, board, and card systems</div>
+            <div class="role-item">Developed prototype cards and components</div>
+            <div class="role-item">Iterated on balance and strategic depth through playtests</div>
+          </div>
+          <div class="proj-chips">
+            <span class="chip">Game Rules Design</span>
+            <span class="chip">Card Design</span>
+            <span class="chip">Balance Testing</span>
+            <span class="chip">Playtesting</span>
+          </div>
+          <div class="board-images">
+            <img class="board-img" src="https://static.wixstatic.com/media/25e166_e720ef87e4174cf8beca333638132c2a~mv2.jpg" alt="Archipelago Board"/>
+            <img class="board-img" src="https://static.wixstatic.com/media/25e166_bbdfd42906c44e82a3ff3e1e98366ba5~mv2.jpg" alt="Wood Cards"/>
+            <img class="board-img" src="https://static.wixstatic.com/media/25e166_788cfbb32690494eb8e07a431f2e2646~mv2.jpg" alt="Cards"/>
+            <img class="board-img" src="https://static.wixstatic.com/media/25e166_378c555041a64d4390ecb94d860eacab~mv2.jpg" alt="Cards"/>
+            <img class="board-img" src="https://static.wixstatic.com/media/25e166_bbb2a036eeee460ca44754ad2d317e86~mv2.jpg" alt="Movement"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHENEMY -->
+    <div class="proj-card board reveal">
+      <div class="proj-card-inner">
+        <div class="proj-info">
+          <div class="proj-num">PROJECT · 004</div>
+          <div class="proj-icon-title">
+            <span class="proj-game-icon">🃏</span>
+            <span class="proj-title">ARCHENEMY</span>
+          </div>
+          <div class="proj-genre">Tabletop · Board Game · Social Strategy</div>
+          <p class="proj-desc">A board game inspired by Ludo, replacing dice with numbered and power cards — and introducing friendships and betrayals as core mechanics. The shift from luck to cards adds meaningful decision-making, while the social dynamics create memorable moments of alliance and treachery.</p>
+          <div class="proj-roles">
+            <div class="role-item">Designed game rules, board, and card systems</div>
+            <div class="role-item">Developed prototype cards and components</div>
+            <div class="role-item">Iterated based on playtests to refine balance and strategic depth</div>
+          </div>
+          <div class="proj-chips">
+            <span class="chip">Game Rules Design</span>
+            <span class="chip">Card Mechanics</span>
+            <span class="chip">Social Dynamics</span>
+            <span class="chip">Playtesting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">©2025 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

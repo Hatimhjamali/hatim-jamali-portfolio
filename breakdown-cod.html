@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Call of Duty Mobile Breakdown — Hatim Jamali</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.doc-hero{padding:4rem 2.5rem 2rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem}
+.doc-back{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text2);text-decoration:none;letter-spacing:0.12em;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;transition:color 0.2s}
+.doc-back:hover{color:var(--cyan)}
+.doc-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:700;color:var(--white);letter-spacing:0.04em}
+.doc-sub{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--cyan2);letter-spacing:0.15em;text-transform:uppercase;margin-top:0.4rem}
+.doc-icon{font-size:4rem;opacity:0.8}
+.meta-strip{display:flex;gap:1px;background:var(--border);border:1px solid var(--border);max-width:1200px;margin:0 auto}
+.meta-cell{flex:1;padding:1rem 1.2rem;background:var(--panel)}
+.meta-label{font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.3rem}
+.meta-val{font-family:'Rajdhani',sans-serif;font-size:0.95rem;font-weight:600;color:var(--white);letter-spacing:0.04em}
+.doc-layout{display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start;margin-top:1rem}
+.doc-main{display:flex;flex-direction:column;gap:2rem}
+.doc-sidebar{display:flex;flex-direction:column;gap:1.2rem;position:sticky;top:80px}
+.doc-block{background:var(--panel);border:1px solid var(--border);overflow:hidden}
+.block-header{padding:0.9rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.8rem;background:var(--panel2)}
+.block-icon{font-size:1rem}
+.block-title{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:var(--white);letter-spacing:0.08em}
+.block-body{padding:1.4rem}
+.block-body p{font-size:0.88rem;line-height:1.8;color:var(--text2);margin-bottom:0.8rem}
+.block-body p:last-child{margin-bottom:0}
+.block-body strong{color:var(--text)}
+.loop-visual{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;padding:1rem 1.4rem;background:var(--bg2);border-top:1px solid var(--border)}
+.loop-node{padding:0.4rem 0.8rem;border:1px solid var(--border2);background:var(--panel);font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text2);letter-spacing:0.08em}
+.loop-node.highlight{border-color:var(--cyan);color:var(--cyan);background:rgba(0,200,255,0.06)}
+.loop-arr{color:var(--cyan2);font-size:0.7rem}
+.insight-list{display:flex;flex-direction:column;gap:0.8rem}
+.insight-entry{padding:0.9rem 1rem;border:1px solid var(--border);background:var(--bg2);border-left:3px solid var(--cyan2);display:flex;gap:0.8rem;align-items:flex-start}
+.insight-entry.gold{border-left-color:var(--gold)}
+.insight-entry.green{border-left-color:var(--green)}
+.insight-num{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--cyan2);flex-shrink:0;margin-top:0.15rem}
+.insight-text{font-size:0.85rem;line-height:1.65;color:var(--text2)}
+.insight-text strong{color:var(--text)}
+.psych-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:0.5rem}
+.psych-card{padding:0.8rem 1rem;border:1px solid var(--border);background:var(--bg2)}
+.psych-title{font-family:'Rajdhani',sans-serif;font-size:0.85rem;font-weight:700;color:var(--cyan);letter-spacing:0.05em;margin-bottom:0.3rem}
+.psych-desc{font-size:0.75rem;line-height:1.5;color:var(--text2)}
+.sidebar-card{background:var(--panel);border:1px solid var(--border)}
+.sidebar-header{padding:0.7rem 1rem;border-bottom:1px solid var(--border);background:var(--panel2);font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase}
+.sidebar-body{padding:1rem;display:flex;flex-direction:column;gap:0.6rem}
+.sidebar-item{font-size:0.8rem;color:var(--text2);line-height:1.5;padding:0.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:0.5rem}
+.sidebar-item:last-child{border-bottom:none;padding-bottom:0}
+.sidebar-item::before{content:'▸';color:var(--cyan2);flex-shrink:0}
+.rating-row{display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0}
+.rating-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--text3);letter-spacing:0.1em}
+.rating-dots{display:flex;gap:3px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--border2)}
+.dot.lit{background:var(--cyan);box-shadow:0 0 4px var(--cyan)}
+.dot.green{background:var(--green);box-shadow:0 0 4px var(--green)}
+@media(max-width:900px){.doc-layout{grid-template-columns:1fr}.doc-sidebar{position:static}}
+@media(max-width:720px){.doc-hero{padding:2.5rem 1.5rem 1.5rem}.meta-strip{flex-wrap:wrap}.meta-cell{flex:1 1 40%}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<div class="doc-hero">
+  <div>
+    <a href="breakdowns.html" class="doc-back">← BACK TO BREAKDOWNS</a>
+    <div class="doc-title">CALL OF DUTY: MOBILE</div>
+    <div class="doc-sub">Monetization & Player Psychology Analysis</div>
+  </div>
+  <div class="doc-icon">🎯</div>
+</div>
+
+<div class="meta-strip">
+  <div class="meta-cell"><div class="meta-label">Developer</div><div class="meta-val">TiMi Studios / Activision</div></div>
+  <div class="meta-cell"><div class="meta-label">Genre</div><div class="meta-val">Competitive Shooter</div></div>
+  <div class="meta-cell"><div class="meta-label">Platform</div><div class="meta-val">Mobile</div></div>
+  <div class="meta-cell"><div class="meta-label">Model</div><div class="meta-val">Cosmetic / Non-P2W</div></div>
+</div>
+
+<div class="divider"></div>
+
+<section class="page-wrap">
+  <div class="doc-layout">
+    <div class="doc-main">
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">📋</span><span class="block-title">GAME OVERVIEW</span></div>
+        <div class="block-body">
+          <p>Call of Duty: Mobile is a <strong>real-time multiplayer first-person shooter</strong> developed by TiMi Studios and published by Activision. Released globally in October 2019, it represents the mobile adaptation of the long-running Call of Duty franchise, which had previously been available exclusively on PC and console platforms.</p>
+          <p>Unlike strategy games such as Clash of Clans or Whiteout Survival, CoD: Mobile does <strong>not restrict gameplay progression behind timers or resource limitations</strong>. All players have equal access to core gameplay systems regardless of spending. Instead, monetisation is centred around <strong>cosmetic customisation and identity expression</strong>.</p>
+        </div>
+        <div class="loop-visual">
+          <span class="loop-node highlight">Enter Match</span><span class="loop-arr">→</span>
+          <span class="loop-node">Compete PvP</span><span class="loop-arr">→</span>
+          <span class="loop-node highlight">Earn XP & Rewards</span><span class="loop-arr">→</span>
+          <span class="loop-node">Unlock Cosmetics</span><span class="loop-arr">→</span>
+          <span class="loop-node highlight">Customise Loadout</span>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">🎭</span><span class="block-title">SYSTEM 1 — COSMETIC IDENTITY MONETISATION</span></div>
+        <div class="block-body">
+          <p>The primary monetisation model in CoD: Mobile is <strong>cosmetic monetisation</strong>. Players purchase character skins, weapon skins, animations, visual effects, and emotes. These purchases do not significantly alter gameplay performance, ensuring competitive fairness.</p>
+          <p>Because the player directly controls their character in real-time multiplayer, the character becomes the player's in-game identity. This creates <strong>strong psychological attachment</strong>. Players are motivated to customise their characters to express individuality, appear visually distinct, and signal experience and status.</p>
+          <p>Rare or premium cosmetic items function as <strong>status symbols within multiplayer matches</strong>. Other players can see these items during gameplay, creating a social visibility economy. Players are purchasing <em>how they are perceived</em> by other players — not gameplay advantage. This monetises identity rather than progression.</p>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">🎫</span><span class="block-title">SYSTEM 2 — BATTLE PASS & SEASONAL REWARDS</span></div>
+        <div class="block-body">
+          <p>CoD: Mobile uses a <strong>seasonal Battle Pass system</strong>. Players earn progression by participating in matches and completing gameplay objectives. Free players receive limited rewards. Paid Battle Pass users receive exclusive cosmetic items — character skins, weapon blueprints, animations, and premium visual effects.</p>
+          <p>This monetises <strong>engagement rather than progression restriction</strong>. Players who are already actively playing are more likely to purchase the Battle Pass to maximise their reward efficiency. Because rewards are exclusive and time-limited, this system also leverages <strong>Fear of Missing Out (FOMO)</strong> — players may purchase the Battle Pass to avoid losing access to limited cosmetic content permanently.</p>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">🎰</span><span class="block-title">SYSTEM 3 — LUCKY DRAW & VARIABLE REWARDS</span></div>
+        <div class="block-body">
+          <p>CoD: Mobile includes Lucky Draw systems where players spend premium currency for <strong>randomised cosmetic rewards</strong>. Rare rewards have lower probability, using variable reward reinforcement psychology — players continue spending in pursuit of rare cosmetic items.</p>
+          <p>This system monetises <strong>rarity perception</strong>, not gameplay advantage. The cosmetic nature of rewards means this system avoids the pay-to-win criticism that would come from randomised gameplay items.</p>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">🧠</span><span class="block-title">PLAYER PSYCHOLOGY ANALYSIS</span></div>
+        <div class="block-body">
+          <p>CoD: Mobile monetises several key psychological drivers simultaneously:</p>
+          <div class="psych-grid">
+            <div class="psych-card"><div class="psych-title">Identity Expression</div><div class="psych-desc">Players customise characters to reflect personal identity and stand out from other players.</div></div>
+            <div class="psych-card"><div class="psych-title">Status Signalling</div><div class="psych-desc">Rare cosmetics demonstrate experience and prestige — a social currency within the game.</div></div>
+            <div class="psych-card"><div class="psych-title">Collection Motivation</div><div class="psych-desc">Players are motivated to collect rare items for their own sake, beyond any gameplay function.</div></div>
+            <div class="psych-card"><div class="psych-title">FOMO</div><div class="psych-desc">Time-limited seasonal content creates urgency — miss it now and it's gone forever.</div></div>
+            <div class="psych-card"><div class="psych-title">Social Visibility</div><div class="psych-desc">Cosmetics are constantly visible to other players during live gameplay, amplifying their perceived value.</div></div>
+            <div class="psych-card"><div class="psych-title">Franchise Familiarity</div><div class="psych-desc">Existing IP attachment accelerates emotional investment in characters and customisation.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">📐</span><span class="block-title">FRANCHISE TRANSITION STRATEGY</span></div>
+        <div class="block-body">
+          <p>CoD: Mobile's release followed the success of PUBG Mobile, which had demonstrated the viability of competitive shooters on mobile. However, CoD: Mobile introduced <strong>fast-paced 5v5 modes</strong> — Team Deathmatch, Domination, Search and Destroy — structurally similar to the franchise's console multiplayer experience.</p>
+          <p>This created shorter, repeatable gameplay sessions compared to Battle Royale formats, increasing the number of matches played per session. More matches = more cosmetic exposure = <strong>more visibility for purchased items</strong> = stronger spending incentive.</p>
+          <p>Existing franchise familiarity accelerated emotional player investment. Players were already familiar with the game's characters, weapons, and visual style — <strong>reducing adoption friction</strong> and increasing attachment to cosmetic customisation from day one.</p>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">💡</span><span class="block-title">KEY DESIGN INSIGHTS</span></div>
+        <div class="block-body">
+          <div class="insight-list">
+            <div class="insight-entry green"><span class="insight-num">01</span><span class="insight-text"><strong>Monetise identity, not performance.</strong> Removing pay-to-win mechanics builds player trust and long-term monetisation sustainability.</span></div>
+            <div class="insight-entry gold"><span class="insight-num">02</span><span class="insight-text"><strong>Short sessions = more cosmetic exposure.</strong> 5v5 matches increase the frequency at which other players see your purchased items — multiplying their social value.</span></div>
+            <div class="insight-entry"><span class="insight-num">03</span><span class="insight-text"><strong>Franchise IP lowers the cost of emotional investment.</strong> Players arrive already attached to characters — skipping the months of relationship-building that new IPs require.</span></div>
+            <div class="insight-entry gold"><span class="insight-num">04</span><span class="insight-text"><strong>Battle Pass monetises active players, not whales.</strong> Players already engaged are the highest-conversion segment for pass purchases.</span></div>
+            <div class="insight-entry"><span class="insight-num">05</span><span class="insight-text"><strong>Voluntary spending sustains long-term revenue.</strong> Players who feel respected and unpressured are more likely to spend consistently over years rather than burning out.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="doc-sidebar">
+      <div class="sidebar-card reveal">
+        <div class="sidebar-header">Monetization Rating</div>
+        <div class="sidebar-body">
+          <div class="rating-row"><span class="rating-label">Aggression</span><div class="rating-dots"><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot"></span><span class="dot"></span></div></div>
+          <div class="rating-row"><span class="rating-label">Fairness</span><div class="rating-dots"><span class="dot lit green"></span><span class="dot lit green"></span><span class="dot lit green"></span><span class="dot lit green"></span><span class="dot lit green"></span></div></div>
+          <div class="rating-row"><span class="rating-label">Cleverness</span><div class="rating-dots"><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span><span class="dot lit"></span></div></div>
+          <div class="rating-row"><span class="rating-label">Player Trust</span><div class="rating-dots"><span class="dot lit green"></span><span class="dot lit green"></span><span class="dot lit green"></span><span class="dot lit green"></span><span class="dot"></span></div></div>
+        </div>
+      </div>
+      <div class="sidebar-card reveal">
+        <div class="sidebar-header">Systems Covered</div>
+        <div class="sidebar-body">
+          <div class="sidebar-item">Cosmetic Identity Design</div>
+          <div class="sidebar-item">Seasonal Battle Pass</div>
+          <div class="sidebar-item">Lucky Draw / Gacha</div>
+          <div class="sidebar-item">FOMO & Time-Limited Content</div>
+          <div class="sidebar-item">Status Signalling Economy</div>
+          <div class="sidebar-item">Non-P2W Model</div>
+          <div class="sidebar-item">Franchise Transfer Strategy</div>
+          <div class="sidebar-item">Session Design & Exposure</div>
+        </div>
+      </div>
+      <div class="sidebar-card reveal">
+        <div class="sidebar-header">Other Breakdowns</div>
+        <div class="sidebar-body">
+          <a href="breakdown-whiteout.html" class="sidebar-item" style="text-decoration:none;color:var(--text2)">🏔️ Whiteout Survival</a>
+          <a href="breakdown-coc.html" class="sidebar-item" style="text-decoration:none;color:var(--text2)">⚔️ Clash of Clans</a>
+          <a href="breakdown-silk.html" class="sidebar-item" style="text-decoration:none;color:var(--gold)">★ Silk Empire GDD</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">©2025 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

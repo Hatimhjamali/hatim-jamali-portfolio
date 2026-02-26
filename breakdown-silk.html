@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Silk Empire GDD — Hatim Jamali</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.doc-hero{padding:4rem 2.5rem 2rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem}
+.doc-back{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text2);text-decoration:none;letter-spacing:0.12em;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;transition:color 0.2s}
+.doc-back:hover{color:var(--cyan)}
+.doc-title{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--white);letter-spacing:0.04em}
+.doc-sub{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-top:0.4rem}
+.doc-badge{display:inline-flex;align-items:center;gap:0.4rem;font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--gold);border:1px solid rgba(240,192,64,0.4);background:rgba(240,192,64,0.07);padding:0.3rem 0.7rem;letter-spacing:0.12em;margin-bottom:0.8rem}
+.doc-badge::before{content:'★ '}
+.doc-icon{font-size:4rem;opacity:0.8}
+.meta-strip{display:flex;gap:1px;background:var(--border);border:1px solid var(--border);max-width:1200px;margin:0 auto}
+.meta-cell{flex:1;padding:1rem 1.2rem;background:var(--panel)}
+.meta-label{font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.3rem}
+.meta-val{font-family:'Rajdhani',sans-serif;font-size:0.95rem;font-weight:600;color:var(--white);letter-spacing:0.04em}
+.doc-layout{display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start;margin-top:1rem}
+.doc-main{display:flex;flex-direction:column;gap:2rem}
+.doc-sidebar{display:flex;flex-direction:column;gap:1.2rem;position:sticky;top:80px}
+.doc-block{background:var(--panel);border:1px solid var(--border);overflow:hidden}
+.doc-block.gold-border{border-color:rgba(240,192,64,0.3)}
+.block-header{padding:0.9rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.8rem;background:var(--panel2)}
+.block-icon{font-size:1rem}
+.block-title{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:var(--white);letter-spacing:0.08em}
+.block-body{padding:1.4rem}
+.block-body p{font-size:0.88rem;line-height:1.8;color:var(--text2);margin-bottom:0.8rem}
+.block-body p:last-child{margin-bottom:0}
+.block-body strong{color:var(--text)}
+.loop-visual{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;padding:1rem 1.4rem;background:var(--bg2);border-top:1px solid var(--border)}
+.loop-node{padding:0.4rem 0.8rem;border:1px solid var(--border2);background:var(--panel);font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text2);letter-spacing:0.08em}
+.loop-node.gold{border-color:rgba(240,192,64,0.5);color:var(--gold);background:rgba(240,192,64,0.05)}
+.loop-arr{color:var(--gold);font-size:0.7rem}
+.goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.goal-card{padding:1rem;border:1px solid var(--border);background:var(--bg2)}
+.goal-label{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4rem}
+.goal-text{font-size:0.82rem;color:var(--text2);line-height:1.55}
+.insight-list{display:flex;flex-direction:column;gap:0.8rem}
+.insight-entry{padding:0.9rem 1rem;border:1px solid var(--border);background:var(--bg2);border-left:3px solid var(--cyan2);display:flex;gap:0.8rem;align-items:flex-start}
+.insight-entry.gold{border-left-color:var(--gold)}
+.insight-num{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--cyan2);flex-shrink:0;margin-top:0.15rem}
+.insight-entry.gold .insight-num{color:var(--gold)}
+.insight-text{font-size:0.85rem;line-height:1.65;color:var(--text2)}
+.insight-text strong{color:var(--text)}
+.sidebar-card{background:var(--panel);border:1px solid var(--border)}
+.sidebar-header{padding:0.7rem 1rem;border-bottom:1px solid var(--border);background:var(--panel2);font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase}
+.sidebar-header.cyan{color:var(--cyan)}
+.sidebar-body{padding:1rem;display:flex;flex-direction:column;gap:0.6rem}
+.sidebar-item{font-size:0.8rem;color:var(--text2);line-height:1.5;padding:0.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:0.5rem}
+.sidebar-item:last-child{border-bottom:none;padding-bottom:0}
+.sidebar-item::before{content:'▸';color:var(--gold);flex-shrink:0}
+.sidebar-item.cyan::before{color:var(--cyan2)}
+@media(max-width:900px){.doc-layout{grid-template-columns:1fr}.doc-sidebar{position:static}}
+@media(max-width:720px){.doc-hero{padding:2.5rem 1.5rem 1.5rem}.meta-strip{flex-wrap:wrap}.meta-cell{flex:1 1 40%}.goal-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<div class="doc-hero">
+  <div>
+    <a href="breakdowns.html" class="doc-back">← BACK TO BREAKDOWNS</a>
+    <div class="doc-badge">ORIGINAL GAME DESIGN DOCUMENT</div>
+    <div class="doc-title">SILK EMPIRE</div>
+    <div class="doc-sub">Game Design Document v2 — Original Concept</div>
+  </div>
+  <div class="doc-icon">🧵</div>
+</div>
+
+<div class="meta-strip">
+  <div class="meta-cell"><div class="meta-label">Type</div><div class="meta-val">Original GDD</div></div>
+  <div class="meta-cell"><div class="meta-label">Genre</div><div class="meta-val">Idle Economic Sim</div></div>
+  <div class="meta-cell"><div class="meta-label">Platform</div><div class="meta-val">Mobile (+ PC Future)</div></div>
+  <div class="meta-cell"><div class="meta-label">Target Market</div><div class="meta-val">India Tier-2 / Tier-3</div></div>
+</div>
+
+<div class="divider"></div>
+
+<section class="page-wrap">
+  <div class="doc-layout">
+    <div class="doc-main">
+
+      <div class="doc-block gold-border reveal">
+        <div class="block-header"><span class="block-icon">🎯</span><span class="block-title">DESIGN GOALS</span></div>
+        <div class="block-body">
+          <div class="goal-grid">
+            <div class="goal-card"><div class="goal-label">Primary Goal</div><div class="goal-text">Design a mobile-first idle economic simulation tailored for India's Tier-2 and Tier-3 dominant gaming market.</div></div>
+            <div class="goal-card"><div class="goal-label">Fair Monetisation</div><div class="goal-text">Provide non-pay-to-win monetisation focused on expansion and content, not progression restriction.</div></div>
+            <div class="goal-card"><div class="goal-label">Long-Term Engagement</div><div class="goal-text">Create sustained engagement through geographic expansion, cultural relevance, and economic progression.</div></div>
+            <div class="goal-card"><div class="goal-label">Accessibility</div><div class="goal-text">Ensure full compatibility with low- and mid-range mobile devices to reach the widest possible audience.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">📊</span><span class="block-title">MARKET STRUCTURE & DESIGN JUSTIFICATION</span></div>
+        <div class="block-body">
+          <p>India is a <strong>mobile-first gaming market</strong>, with over 60% of gamers located in Tier-2 and Tier-3 cities. These players use smartphones as their primary gaming platform, prefer relatable progression-driven experiences, and have high engagement but <strong>lower tolerance for aggressive monetisation</strong>.</p>
+          <p>Silk Empire responds directly to this market data: the game begins in a Tier-2 city and allows players to expand into larger cities. This aligns progression with <strong>real-world economic aspiration</strong> — players aren't just growing a number, they're mirroring a relatable journey from smaller to larger opportunities.</p>
+          <p>This design decision increases emotional relatability and engagement by grounding the game's fantasy in the player's own cultural and geographic context.</p>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">🔄</span><span class="block-title">CORE GAMEPLAY LOOP</span></div>
+        <div class="block-body">
+          <p>Player progression moves through <strong>geographic and economic expansion</strong> rather than purely numerical growth. Instead of "reach level 50," the goal is "expand your empire from Tier-2 cities to Tier-1 cities" — making every milestone feel meaningful and aspirational.</p>
+        </div>
+        <div class="loop-visual">
+          <span class="loop-node gold">Produce Silk</span><span class="loop-arr">→</span>
+          <span class="loop-node">Convert to Cloth</span><span class="loop-arr">→</span>
+          <span class="loop-node gold">Sell</span><span class="loop-arr">→</span>
+          <span class="loop-node">Earn Profit</span><span class="loop-arr">→</span>
+          <span class="loop-node gold">Expand Cities</span><span class="loop-arr">→</span>
+          <span class="loop-node">Unlock New Silk Types</span><span class="loop-arr">→</span>
+          <span class="loop-node gold">Repeat</span>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">🧠</span><span class="block-title">CORE PLAYER MOTIVATIONS</span></div>
+        <div class="block-body">
+          <p><strong>Primary motivation:</strong> Build and expand a silk empire across cities — a clear, tangible goal tied to visible geographic growth on a map.</p>
+          <p><strong>Secondary motivation:</strong> Unlock higher-tier cities and new silk types — creating a ladder of progression that always has a visible next step.</p>
+          <p><strong>Tertiary motivation:</strong> Access new expansion content through DLC — ensuring long-term monetisation without restricting the base experience.</p>
+          <p>This three-tier motivation structure ensures players always have a <strong>short-term, medium-term, and long-term goal</strong> active simultaneously — a core principle of effective engagement loop design.</p>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">📱</span><span class="block-title">PLATFORM STRATEGY</span></div>
+        <div class="block-body">
+          <p><strong>Primary platform:</strong> Mobile (Android and iOS) — reaching the widest possible audience in the target market through the device they already use for gaming.</p>
+          <p><strong>Future expansion:</strong> Architecture supports a potential PC release via Steam, ensuring scalability without restricting future expansion. This allows the game to grow into premium PC markets after establishing its mobile base.</p>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">💰</span><span class="block-title">MONETISATION PHILOSOPHY</span></div>
+        <div class="block-body">
+          <p>Silk Empire deliberately avoids the aggressive monetisation patterns identified in the Whiteout Survival and Clash of Clans breakdowns. The design philosophy is <strong>"expansion and content, not progression restriction."</strong></p>
+          <p>Players should never feel their progress is being held hostage. Monetisation should feel like <strong>buying more game</strong> — new cities, new silk types, new mechanics — not paying to remove artificial friction.</p>
+          <p>This approach targets the Tier-2/Tier-3 player profile identified in the Lumikai report: high engagement, moderate spending willingness, <strong>high sensitivity to feeling cheated</strong>. A fair monetisation model builds long-term trust and retention rather than burning through a player's willingness to spend in the first month.</p>
+        </div>
+      </div>
+
+      <div class="doc-block reveal">
+        <div class="block-header"><span class="block-icon">💡</span><span class="block-title">KEY DESIGN DECISIONS</span></div>
+        <div class="block-body">
+          <div class="insight-list">
+            <div class="insight-entry gold"><span class="insight-num">01</span><span class="insight-text"><strong>Geographic progression over numerical progression.</strong> "Expand to Mumbai" is a more emotionally resonant goal than "reach level 50."</span></div>
+            <div class="insight-entry gold"><span class="insight-num">02</span><span class="insight-text"><strong>Market data drives design decisions.</strong> Every core system is justified by Lumikai report data on how the target audience actually behaves.</span></div>
+            <div class="insight-entry"><span class="insight-num">03</span><span class="insight-text"><strong>Cultural relevance as engagement driver.</strong> Indian players see their own economic reality reflected in the progression system — increasing relatability and emotional investment.</span></div>
+            <div class="insight-entry gold"><span class="insight-num">04</span><span class="insight-text"><strong>Respectful monetisation builds long-term revenue.</strong> Players who trust the game's fairness spend more consistently over time than players who feel pressured.</span></div>
+            <div class="insight-entry"><span class="insight-num">05</span><span class="insight-text"><strong>Low-end device support = broader audience.</strong> Deliberately targeting mid-range hardware opens the game to a larger addressable market in Tier-2/Tier-3 cities.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="doc-sidebar">
+      <div class="sidebar-card reveal">
+        <div class="sidebar-header">Design Pillars</div>
+        <div class="sidebar-body">
+          <div class="sidebar-item">Market Research–Driven</div>
+          <div class="sidebar-item">Non-Pay-to-Win</div>
+          <div class="sidebar-item">Geographic Progression</div>
+          <div class="sidebar-item">Cultural Relevance</div>
+          <div class="sidebar-item">Low-End Device Support</div>
+          <div class="sidebar-item">DLC Expansion Model</div>
+          <div class="sidebar-item">Three-Tier Motivation</div>
+          <div class="sidebar-item">Mobile-First Architecture</div>
+        </div>
+      </div>
+      <div class="sidebar-card reveal">
+        <div class="sidebar-header cyan">Other Breakdowns</div>
+        <div class="sidebar-body">
+          <a href="breakdown-whiteout.html" class="sidebar-item cyan" style="text-decoration:none;color:var(--text2)">🏔️ Whiteout Survival</a>
+          <a href="breakdown-coc.html" class="sidebar-item cyan" style="text-decoration:none;color:var(--text2)">⚔️ Clash of Clans</a>
+          <a href="breakdown-cod.html" class="sidebar-item cyan" style="text-decoration:none;color:var(--text2)">🎯 Call of Duty: Mobile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">©2025 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

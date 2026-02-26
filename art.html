@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>3D Art — Hatim Jamali</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.page-hero{padding:4rem 2.5rem 2rem;max-width:1200px;margin:0 auto}
+.page-hero-label{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:0.2em;text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.page-hero-label::before{content:'';width:24px;height:1px;background:var(--cyan)}
+.page-hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--white);letter-spacing:0.05em;margin-bottom:0.8rem}
+.page-hero p{font-size:0.95rem;color:var(--text2);max-width:560px;line-height:1.75}
+.art-note{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text3);border:1px solid var(--border);border-left:2px solid var(--cyan-dim);padding:0.7rem 1rem;background:var(--panel);letter-spacing:0.08em;margin-top:1rem}
+.art-project{margin-bottom:3rem}
+.art-proj-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
+.art-proj-num{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--text3);letter-spacing:0.15em}
+.art-proj-title{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;color:var(--white);letter-spacing:0.05em}
+.art-proj-sw{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;margin-left:auto}
+.art-proj-desc{font-size:0.87rem;color:var(--text2);line-height:1.75;max-width:700px;margin-bottom:1.2rem}
+.gallery{display:grid;gap:0.8rem}
+.gallery.cols-2{grid-template-columns:repeat(2,1fr)}
+.gallery.cols-3{grid-template-columns:repeat(3,1fr)}
+.gallery.cols-4{grid-template-columns:repeat(4,1fr)}
+.gal-item{position:relative;overflow:hidden;background:var(--bg2);border:1px solid var(--border);cursor:zoom-in;transition:border-color 0.3s,transform 0.3s}
+.gal-item:hover{border-color:var(--border2);transform:scale(1.01)}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.gal-item:hover img{transform:scale(1.04)}
+.gal-item.tall{aspect-ratio:3/4}
+.gal-item.wide{grid-column:span 2}
+.gal-item.landscape{aspect-ratio:16/9}
+.gal-overlay{position:absolute;inset:0;background:rgba(0,200,255,0.05);opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center}
+.gal-item:hover .gal-overlay{opacity:1}
+.gal-zoom{font-size:1.5rem;opacity:0.8}
+.gal-caption{position:absolute;bottom:0;left:0;right:0;padding:0.5rem 0.8rem;background:linear-gradient(transparent,rgba(6,11,20,0.92));font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text2);letter-spacing:0.1em;transform:translateY(100%);transition:transform 0.3s}
+.gal-item:hover .gal-caption{transform:translateY(0)}
+/* VIDEO */
+.vid-showcase{position:relative;background:var(--bg2);border:1px solid var(--border);overflow:hidden;border-radius:0}
+.vid-showcase video{width:100%;display:block;max-height:480px;object-fit:cover}
+.vid-label{padding:0.8rem 1rem;border-top:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text2);letter-spacing:0.1em;background:var(--panel);display:flex;justify-content:space-between;align-items:center}
+.vid-badge{color:var(--cyan);font-size:0.58rem}
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;display:none;align-items:center;justify-content:center;padding:2rem}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border:1px solid var(--border)}
+.lightbox-close{position:absolute;top:1.5rem;right:2rem;font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--text2);cursor:pointer;letter-spacing:0.1em;transition:color 0.2s;z-index:1001}
+.lightbox-close:hover{color:var(--cyan)}
+@media(max-width:720px){
+  .page-hero{padding:2.5rem 1.5rem 1.5rem}
+  .gallery.cols-3,.gallery.cols-4{grid-template-columns:repeat(2,1fr)}
+  .gallery.cols-2{grid-template-columns:1fr}
+  .gal-item.wide{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-label">Visual Work</div>
+  <h1>3D ART & ENVIRONMENTS</h1>
+  <p>Game-ready assets and atmospheric environment renders built in Blender, Maya, and Substance Painter.</p>
+  <div class="art-note">// Supporting production skill used in game design work. Click any image to view full size.</div>
+</div>
+
+<div class="divider"></div>
+
+<section class="page-wrap">
+
+  <!-- OCEAN ANIMATION -->
+  <div class="art-project reveal">
+    <div class="art-proj-header">
+      <span class="art-proj-num">01</span>
+      <span class="art-proj-title">OCEAN SCENE</span>
+      <span class="art-proj-sw">Blender · Simulation · Animation</span>
+    </div>
+    <p class="art-proj-desc">A dynamic ocean simulation featuring realistic fluid simulation, moody night lighting, and an animated sequence. Demonstrates technical knowledge of Blender's ocean modifier, volumetric atmosphere, and render compositing.</p>
+    <div class="vid-showcase">
+      <video controls poster="Ocean1.jpg">
+        <source src="OceanAni.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+      </video>
+      <div class="vid-label">
+        <span>OCEAN ANIMATION — Blender Simulation</span>
+        <span class="vid-badge">▶ ANIMATED</span>
+      </div>
+    </div>
+    <div class="gallery cols-2" style="margin-top:0.8rem">
+      <div class="gal-item landscape" onclick="openLightbox(this)">
+        <img src="Ocean1.jpg" alt="Ocean Night Render"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">OCEAN NIGHT — Moody storm lighting, lighthouse prop</div>
+      </div>
+      <!-- Ocean2 and Ocean3 are editor screenshots, skipped intentionally -->
+    </div>
+  </div>
+
+  <div class="divider" style="margin:2rem 0"></div>
+
+  <!-- ENVIRONMENTS -->
+  <div class="art-project reveal">
+    <div class="art-proj-header">
+      <span class="art-proj-num">02</span>
+      <span class="art-proj-title">3D ENVIRONMENT DESIGN</span>
+      <span class="art-proj-sw">Blender · Photogrammetry</span>
+    </div>
+    <p class="art-proj-desc">A set of fully designed concept environments showcasing atmospheric detail, lighting, and composition. Techniques include volumetric fog, photogrammetry with scanned objects, and vegetation scattering.</p>
+    <div class="gallery cols-3">
+      <div class="gal-item landscape" onclick="openLightbox(this)">
+        <img src="winterCabin.png" alt="The Cabin"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">THE CABIN — Volumetric fog, snowfall</div>
+      </div>
+      <div class="gal-item landscape" onclick="openLightbox(this)">
+        <img src="Ruins.png" alt="The Ruins"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">THE RUINS — Photogrammetry scanned assets</div>
+      </div>
+      <div class="gal-item landscape" onclick="openLightbox(this)">
+        <img src="path_forrest.png" alt="The Forest Path"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">THE FOREST PATH — Vegetation, volumetric fog</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin:2rem 0"></div>
+
+  <!-- SHIELD -->
+  <div class="art-project reveal">
+    <div class="art-proj-header">
+      <span class="art-proj-num">03</span>
+      <span class="art-proj-title">MEDIEVAL SHIELD</span>
+      <span class="art-proj-sw">Blender + Substance Painter · Game-Ready Asset</span>
+    </div>
+    <p class="art-proj-desc">A realistic, game-ready prop modelled in Blender and textured in Substance Painter using a PBR workflow. Inspired by a TV series reference, with accurate normal maps, roughness, and metallic material definition.</p>
+    <div class="gallery cols-3">
+      <div class="gal-item tall" onclick="openLightbox(this)">
+        <img src="Shield1.jpg" alt="Shield Front"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">Shield — Front view</div>
+      </div>
+      <div class="gal-item tall" onclick="openLightbox(this)">
+        <img src="Shield2.jpg" alt="Shield Angle"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">Shield — Angled, material depth</div>
+      </div>
+      <div class="gal-item tall" onclick="openLightbox(this)">
+        <img src="Shield3.jpg" alt="Shield Detail"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">Shield — Texture detail close-up</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin:2rem 0"></div>
+
+  <!-- WATCH -->
+  <div class="art-project reveal">
+    <div class="art-proj-header">
+      <span class="art-proj-num">04</span>
+      <span class="art-proj-title">CONCEPT WATCH</span>
+      <span class="art-proj-sw">Blender · Hard Surface Modelling</span>
+    </div>
+    <p class="art-proj-desc">A concept watch designed from a Pinterest reference with a unique mechanical detail — the clock hands originate from the edges of the face rather than the centre. Required careful hard-surface modelling to execute cleanly.</p>
+    <div class="gallery cols-2">
+      <div class="gal-item landscape" onclick="openLightbox(this)">
+        <img src="Watch-Model.png" alt="Watch Render 1"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">Concept Watch — Primary render</div>
+      </div>
+      <div class="gal-item landscape" onclick="openLightbox(this)">
+        <img src="Watch-Model-2.png" alt="Watch Render 2"/>
+        <div class="gal-overlay"><span class="gal-zoom">🔍</span></div>
+        <div class="gal-caption">Concept Watch — Alternative angle</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">✕ CLOSE</span>
+  <img id="lightbox-img" src="" alt=""/>
+</div>
+
+<footer>
+  <div class="footer-left">©2025 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script>
+function openLightbox(el){
+  document.getElementById('lightbox-img').src=el.querySelector('img').src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+</script>
+</body>
+</html>

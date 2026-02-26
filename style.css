@@ -1,0 +1,198 @@
+/* ═══════════════════════════════════════
+   HATIM JAMALI PORTFOLIO — SHARED STYLES
+   ═══════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg:       #060b14;
+  --bg2:      #0a1120;
+  --bg3:      #0f1829;
+  --panel:    #0d1825;
+  --panel2:   #121f30;
+  --border:   #1a3050;
+  --border2:  #1e4070;
+  --cyan:     #00c8ff;
+  --cyan2:    #0090d4;
+  --cyan-dim: #004d7a;
+  --gold:     #f0c040;
+  --green:    #30e090;
+  --red:      #ff4060;
+  --text:     #c8dff0;
+  --text2:    #6a8fa8;
+  --text3:    #3a5f7a;
+  --white:    #e8f4ff;
+  --glow:     0 0 20px rgba(0,200,255,0.25);
+  --glow-sm:  0 0 8px rgba(0,200,255,0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* BG GRID */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,150,220,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,150,220,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none; z-index: 0;
+}
+
+/* SCAN LINE */
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: scanBar 5s linear infinite;
+  opacity: 0.4; z-index: 999; pointer-events: none;
+}
+@keyframes scanBar {
+  0%   { top: 0;     opacity: 0.5; }
+  100% { top: 100vh; opacity: 0;   }
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 2.5rem;
+  background: rgba(6,11,20,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+nav::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan2), transparent);
+}
+.nav-logo {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700; font-size: 1.4rem;
+  letter-spacing: 0.15em; color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--cyan); }
+.nav-logo::before { content: '▶ '; color: var(--cyan); font-size: 0.7em; vertical-align: middle; }
+nav ul { list-style: none; display: flex; gap: 1.8rem; align-items: center; }
+nav a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.12em;
+  text-decoration: none; color: var(--text2);
+  text-transform: uppercase; transition: color 0.2s;
+  position: relative; padding-bottom: 4px;
+}
+nav a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: var(--cyan);
+  transform: scaleX(0); transition: transform 0.2s;
+}
+nav a:hover, nav a.active { color: var(--cyan); }
+nav a:hover::after, nav a.active::after { transform: scaleX(1); }
+.nav-status {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem; color: var(--green);
+}
+.nav-status::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 6px var(--green);
+  animation: blink 2s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── PAGE WRAPPER ── */
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 4rem 2.5rem; position: relative; }
+
+/* ── SECTION HEADER ── */
+.sec-header {
+  display: flex; align-items: center; gap: 1.2rem; margin-bottom: 2.5rem;
+}
+.sec-num {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  color: var(--cyan); background: rgba(0,200,255,0.08);
+  border: 1px solid var(--cyan-dim); padding: 0.25rem 0.6rem; letter-spacing: 0.12em;
+}
+.sec-title {
+  font-family: 'Rajdhani', sans-serif; font-size: 1.6rem;
+  font-weight: 700; letter-spacing: 0.08em; color: var(--white);
+}
+.sec-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border2), transparent); }
+.sec-icon { font-size: 1.2rem; opacity: 0.7; }
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  max-width: 1200px; margin: 0 auto;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.7rem 1.6rem; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: all 0.2s; border: none;
+}
+.btn-primary { background: var(--cyan); color: var(--bg); font-weight: 700; }
+.btn-primary:hover { background: var(--white); box-shadow: 0 0 20px rgba(0,200,255,0.4); }
+.btn-ghost { background: transparent; color: var(--cyan); border: 1px solid var(--cyan2); }
+.btn-ghost:hover { background: rgba(0,200,255,0.08); border-color: var(--cyan); }
+.btn-gold { background: var(--gold); color: var(--bg); font-weight: 700; }
+.btn-gold:hover { background: #fff5c0; box-shadow: 0 0 20px rgba(240,192,64,0.4); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 2.5rem;
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-left {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem; color: var(--text3); letter-spacing: 0.1em;
+}
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  color: var(--text2); text-decoration: none; letter-spacing: 0.1em;
+  text-transform: uppercase; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--cyan); }
+
+/* ── FADE IN ── */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan2); }
+
+/* ── MOBILE ── */
+@media(max-width: 720px) {
+  nav { padding: 1rem 1.5rem; }
+  nav ul { gap: 1rem; }
+  .nav-status { display: none; }
+  .page-wrap { padding: 3rem 1.5rem; }
+  footer { flex-direction: column; align-items: flex-start; }
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hatim Jamali — Game Designer</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── HERO ── */
+.hero {
+  min-height: 88vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 2.5rem 4rem;
+  max-width: 1200px; margin: 0 auto;
+  position: relative;
+}
+.hero-deco {
+  position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+  opacity: 0.05; font-size: 20rem;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--cyan);
+  pointer-events: none; user-select: none; line-height: 1;
+}
+.hero-eyebrow {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.72rem;
+  color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--cyan); }
+.hero h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 700;
+  line-height: 0.95; letter-spacing: 0.04em; color: var(--white);
+  text-shadow: 0 0 60px rgba(0,200,255,0.15); margin-bottom: 0.3rem;
+}
+.hero h1 em { font-style: normal; color: var(--cyan); text-shadow: 0 0 30px rgba(0,200,255,0.5); }
+.hero-role {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.78rem;
+  color: var(--text2); letter-spacing: 0.15em; margin: 1.2rem 0 1.8rem;
+  text-transform: uppercase;
+}
+.hero-role span { color: var(--cyan2); }
+.hero-bio {
+  max-width: 520px; font-size: 1rem; line-height: 1.8;
+  color: var(--text2); margin-bottom: 2.5rem;
+}
+
+/* Stat bars */
+.hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.stat { min-width: 150px; }
+.stat-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 0.4rem; display: flex; justify-content: space-between;
+}
+.stat-label span { color: var(--cyan); }
+.stat-bar { height: 3px; background: var(--panel2); border: 1px solid var(--border); overflow: hidden; }
+.stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan2), var(--cyan));
+  box-shadow: 0 0 8px var(--cyan2);
+  animation: fillIn 1.6s ease forwards; width: 0;
+}
+@keyframes fillIn { to { width: var(--w); } }
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.xp-badge {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  color: var(--gold); border: 1px solid rgba(240,192,64,0.35);
+  padding: 0.3rem 0.8rem; background: rgba(240,192,64,0.06); letter-spacing: 0.1em;
+  animation: floatBadge 3s ease-in-out infinite;
+}
+.xp-badge::before { content: '⭐ '; }
+@keyframes floatBadge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+/* ── FEATURED WORK STRIP ── */
+.featured-strip {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+  margin-top: 1rem;
+}
+.feat-card {
+  background: var(--panel);
+  padding: 1.8rem; display: flex; flex-direction: column; gap: 0.8rem;
+  text-decoration: none; color: inherit;
+  transition: background 0.2s; position: relative; overflow: hidden;
+}
+.feat-card:hover { background: var(--panel2); }
+.feat-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: linear-gradient(90deg, var(--cyan2), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.feat-card:hover::after { opacity: 1; }
+.feat-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.feat-label::before { content: ''; width: 16px; height: 1px; background: var(--border2); }
+.feat-icon { font-size: 1.8rem; }
+.feat-title {
+  font-family: 'Rajdhani', sans-serif; font-size: 1.15rem;
+  font-weight: 700; color: var(--white); letter-spacing: 0.05em;
+}
+.feat-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.6; flex: 1; }
+.feat-arrow {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  color: var(--cyan); letter-spacing: 0.1em; margin-top: 0.5rem;
+}
+
+/* ── ABOUT STRIP ── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+}
+.about-text { font-size: 0.95rem; line-height: 1.8; color: var(--text2); }
+.about-text p + p { margin-top: 1rem; }
+.about-text strong { color: var(--text); }
+.skills-wrap { display: flex; flex-direction: column; gap: 0.6rem; }
+.skill-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--panel); border: 1px solid var(--border);
+}
+.skill-row-icon { font-size: 1rem; width: 24px; text-align: center; flex-shrink: 0; }
+.skill-row-name {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  color: var(--text2); letter-spacing: 0.08em; flex: 1;
+}
+.skill-row-bar { width: 80px; height: 3px; background: var(--border); overflow: hidden; }
+.skill-row-fill {
+  height: 100%; background: linear-gradient(90deg, var(--cyan2), var(--cyan));
+  box-shadow: 0 0 6px var(--cyan2);
+  animation: fillIn 1.4s ease forwards; width: 0;
+}
+
+@media(max-width:720px){
+  .hero{padding:3rem 1.5rem 3rem; min-height:auto}
+  .hero-deco{display:none}
+  .featured-strip{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-deco">GD</div>
+  <div class="hero-eyebrow">Game Design Portfolio — v2.0</div>
+  <h1>HATIM<br><em>JAMALI</em></h1>
+  <div class="hero-role">
+    <span>Game Designer</span> · Level Designer · 3D Environment Artist
+  </div>
+  <p class="hero-bio">
+    Passionate about systems design, player psychology, and crafting game experiences that keep players engaged. I analyse how great games work — and design new ones that do too.
+  </p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-label">Systems Design <span>92</span></div>
+      <div class="stat-bar"><div class="stat-fill" style="--w:92%"></div></div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Level Design <span>85</span></div>
+      <div class="stat-bar"><div class="stat-fill" style="--w:85%; animation-delay:0.2s"></div></div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">3D Art <span>78</span></div>
+      <div class="stat-bar"><div class="stat-fill" style="--w:78%; animation-delay:0.4s"></div></div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Monetization Analysis <span>88</span></div>
+      <div class="stat-bar"><div class="stat-fill" style="--w:88%; animation-delay:0.6s"></div></div>
+    </div>
+  </div>
+  <div class="hero-btns">
+    <a href="breakdowns.html" class="btn btn-primary">▶ VIEW BREAKDOWNS</a>
+    <a href="projects.html" class="btn btn-ghost">MY PROJECTS</a>
+    <a href="Resume_HHJ.docx" download class="btn btn-ghost" style="color:var(--gold);border-color:rgba(240,192,64,0.4);">⬇ DOWNLOAD CV</a>
+    <span class="xp-badge">Available for Roles</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FEATURED WORK -->
+<section class="page-wrap">
+  <div class="sec-header">
+    <div class="sec-num">FEATURED</div>
+    <div class="sec-title">WHAT I DO</div>
+    <div class="sec-icon">🎮</div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="featured-strip">
+    <a href="breakdowns.html" class="feat-card reveal">
+      <div class="feat-label">Analysis Work</div>
+      <div class="feat-icon">📊</div>
+      <div class="feat-title">Game Design Breakdowns</div>
+      <div class="feat-desc">In-depth analyses of how top mobile games monetise players using psychology, progression design, and behavioural conditioning.</div>
+      <div class="feat-arrow">VIEW BREAKDOWNS →</div>
+    </a>
+    <a href="projects.html" class="feat-card reveal">
+      <div class="feat-label">Built Projects</div>
+      <div class="feat-icon">🕹️</div>
+      <div class="feat-title">Worked-On Games</div>
+      <div class="feat-desc">From a networked 5v5 Unreal Engine shooter to a zero-gravity space dogfighter — games I designed, prototyped, and iterated on.</div>
+      <div class="feat-arrow">VIEW PROJECTS →</div>
+    </a>
+    <a href="art.html" class="feat-card reveal">
+      <div class="feat-label">Visual Work</div>
+      <div class="feat-icon">🎨</div>
+      <div class="feat-title">3D Art & Environments</div>
+      <div class="feat-desc">Game-ready 3D assets and atmospheric environment renders built in Blender, Maya, and Substance Painter.</div>
+      <div class="feat-arrow">VIEW ART →</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="page-wrap">
+  <div class="sec-header">
+    <div class="sec-num">ABOUT</div>
+    <div class="sec-title">WHO I AM</div>
+    <div class="sec-icon">👾</div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I am a <strong>game designer</strong> who thrives on planning and detailing game experiences. My primary focus is designing immersive worlds and refining gameplay elements to ensure an engaging player journey.</p>
+      <p>I specialise in <strong>systems design, monetisation analysis, and conceptual development</strong> — understanding not just how to build a game, but why players keep coming back.</p>
+      <p>While I have experience with scripting for prototyping, my expertise lies in designing <strong>gameplay flow, mechanics, and player experience</strong> rather than programming. My goal is to create games that are well-balanced, visually compelling, and strategically engaging.</p>
+      <div style="margin-top:1.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="mailto:hatimhjamali@gmail.com" class="btn btn-ghost">✉ EMAIL ME</a>
+        <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank" class="btn btn-ghost">🔗 LINKEDIN</a>
+      </div>
+    </div>
+    <div class="skills-wrap reveal">
+      <div class="skill-row"><span class="skill-row-icon">🎮</span><span class="skill-row-name">Unreal Engine</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:88%"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🎮</span><span class="skill-row-name">Unity</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:82%; animation-delay:0.1s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🧊</span><span class="skill-row-name">Blender</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:80%; animation-delay:0.2s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🎨</span><span class="skill-row-name">Substance Painter</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:75%; animation-delay:0.3s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">📋</span><span class="skill-row-name">GDD Writing</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:90%; animation-delay:0.4s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">📊</span><span class="skill-row-name">Monetization Analysis</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:88%; animation-delay:0.5s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🧠</span><span class="skill-row-name">Player Psychology</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:85%; animation-delay:0.6s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🗺️</span><span class="skill-row-name">Level Design</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:85%; animation-delay:0.7s"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">©2025 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
