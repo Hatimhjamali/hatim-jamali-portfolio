@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CV — Hatim Jamali</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── CV VIEWER ── */
+.cv-toolbar{
+  display:flex;align-items:center;gap:1rem;
+  max-width:1200px;margin:0 auto;padding:1.4rem 2.5rem 1rem;
+}
+.cv-tool-label{
+  font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--cyan);
+  letter-spacing:0.2em;text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;
+}
+.cv-tool-label::before{content:'';width:24px;height:1px;background:var(--cyan)}
+.cv-title{
+  font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--white);
+  letter-spacing:0.05em;font-size:1.4rem;margin-right:auto;
+}
+.cv-icon-btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-family:'Share Tech Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;
+  text-transform:uppercase;text-decoration:none;
+  color:var(--gold);border:1px solid rgba(240,192,64,0.4);
+  background:rgba(240,192,64,0.06);padding:0.5rem 0.9rem;
+  transition:background var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), color var(--t-base) var(--ease);
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+.cv-icon-btn svg{width:15px;height:15px;display:block}
+.cv-icon-btn:hover{
+  background:rgba(240,192,64,0.14);color:#ffe49a;
+  box-shadow:0 0 14px rgba(240,192,64,0.25);
+}
+.cv-icon-btn.ghost{
+  color:var(--cyan);border-color:var(--cyan-dim);background:rgba(0,229,255,0.05);
+}
+.cv-icon-btn.ghost:hover{
+  background:rgba(0,229,255,0.12);color:var(--white);box-shadow:0 0 14px rgba(0,229,255,0.22);
+}
+/* viewer frame */
+.cv-frame-wrap{
+  max-width:1200px;margin:0 auto 3rem;padding:0 2.5rem;
+}
+.cv-frame{
+  position:relative;border:1px solid var(--border2);background:var(--panel);
+  clip-path: polygon(0 14px, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  overflow:hidden;
+}
+.cv-frame iframe{
+  width:100%;height:82vh;min-height:520px;border:0;display:block;background:#525659;
+}
+.cv-fallback{
+  font-family:'Share Tech Mono',monospace;font-size:0.66rem;color:var(--text3);
+  letter-spacing:0.08em;padding:0.8rem 2.5rem;max-width:1200px;margin:0 auto;
+}
+.cv-fallback a{color:var(--cyan)}
+@media(max-width:720px){
+  .cv-toolbar{padding:1.2rem 1.2rem 0.8rem;flex-wrap:wrap;gap:0.7rem}
+  .cv-title{font-size:1.15rem;width:100%;order:-1}
+  .cv-frame-wrap{padding:0 1rem}
+  .cv-frame iframe{height:70vh}
+  .cv-fallback{padding:0.8rem 1rem}
+}
+</style>
+</head>
+<body>
+<div class="crt-overlay"></div>
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+    <li><a href="builds.html">Builds</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<div class="cv-toolbar">
+  <div class="cv-title">RESUME / CV</div>
+  <a class="cv-icon-btn ghost" href="Hatim_Jamali_Resume.pdf" target="_blank" rel="noopener" title="Open in new tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    OPEN
+  </a>
+  <a class="cv-icon-btn" href="Hatim_Jamali_Resume.pdf" download title="Download CV">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    DOWNLOAD
+  </a>
+</div>
+
+<div class="cv-frame-wrap">
+  <div class="cv-frame">
+    <iframe src="Hatim_Jamali_Resume.pdf#toolbar=0&navpanes=0" title="Hatim Jamali — Resume / CV"></iframe>
+  </div>
+</div>
+<div class="cv-fallback">// PDF not rendering? <a href="Hatim_Jamali_Resume.pdf" target="_blank" rel="noopener">Open it in a new tab</a> or use the download button above.</div>
+
+<footer>
+  <div class="footer-left">©2026 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

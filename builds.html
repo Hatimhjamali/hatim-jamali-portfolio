@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Builds — Hatim Jamali</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.page-hero{padding:4rem 2.5rem 2rem;max-width:1200px;margin:0 auto}
+.page-hero-label{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:0.2em;text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.page-hero-label::before{content:'';width:24px;height:1px;background:var(--cyan)}
+.page-hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--white);letter-spacing:0.05em;margin-bottom:0.8rem}
+.page-hero p{font-size:0.95rem;color:var(--text2);max-width:620px;line-height:1.75}
+
+.tier-header{
+  display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1.2rem;
+  font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;
+}
+.tier-header .dot{width:8px;height:8px;border-radius:50%}
+.tier-header .name{color:var(--text)}
+.tier-header .line{flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}
+
+.build-list{display:flex;flex-direction:column;gap:1.2rem}
+.build-card{
+  position:relative;
+  background:var(--panel);border:1px solid var(--border);
+  padding:1.6rem 1.8rem;display:flex;flex-direction:column;gap:0.8rem;
+  transition:border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+.build-card:hover{
+  border-color:var(--cyan-dim);
+  box-shadow: 0 6px 24px rgba(0,229,255,0.08);
+}
+.build-card::before, .build-card::after{
+  content:''; position:absolute; width:12px; height:12px;
+  pointer-events:none; transition:border-color var(--t-base) var(--ease);
+}
+.build-card::before{
+  top:5px; left:5px;
+  border-top:1px solid var(--cyan-dim); border-left:1px solid var(--cyan-dim);
+}
+.build-card::after{
+  bottom:5px; right:5px;
+  border-bottom:1px solid var(--magenta-dim); border-right:1px solid var(--magenta-dim);
+}
+.build-card:hover::before{ border-color:var(--cyan); }
+.build-card:hover::after{ border-color:var(--magenta); }
+.build-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.build-title-row{display:flex;align-items:center;gap:0.7rem}
+.build-icon{font-size:1.4rem}
+.build-title{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;color:var(--white);letter-spacing:0.04em}
+.build-status{font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;padding:0.25rem 0.6rem;border:1px solid var(--border);background:var(--bg2);text-transform:uppercase}
+.build-genre{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.4rem}
+.build-genre::before{content:'';width:8px;height:1px;background:var(--cyan2);display:inline-block}
+.build-desc{font-size:0.88rem;color:var(--text2);line-height:1.75}
+.build-desc + .build-desc{color:var(--text3);font-style:italic}
+.build-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.build-chips .chip{font-family:'Share Tech Mono',monospace;font-size:0.58rem;padding:0.2rem 0.55rem;border:1px solid var(--border);color:var(--text3);background:var(--bg2);letter-spacing:0.07em}
+
+/* Tier color hooks */
+.t-active .build-status{color:var(--cyan);border-color:var(--cyan-dim);background:rgba(0,200,255,0.06)}
+.t-shipped .build-status{color:var(--green);border-color:rgba(48,224,144,0.3);background:rgba(48,224,144,0.05)}
+.t-shelved .build-status{color:var(--gold);border-color:rgba(240,192,64,0.3);background:rgba(240,192,64,0.05)}
+.t-concept .build-status{color:var(--text2);border-color:var(--border);background:var(--bg3)}
+.t-shelved .build-card,.t-concept .build-card{opacity:0.86}
+
+@media(max-width:720px){
+  .page-hero{padding:2.5rem 1.5rem 1.5rem}
+  .build-card{padding:1.3rem 1.3rem}
+}
+</style>
+</head>
+<body>
+<div class="crt-overlay"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+    <li><a href="builds.html" class="active">Builds</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-label">Gamedev Tools & AI Builds</div>
+  <h1>BUILDS</h1>
+  <p>Self-contained tools and AI experiments for indie devs. Active builds, personal infra I actually run, shelved explorations, and a few concepts on the bench.</p>
+</div>
+
+<div class="divider"></div>
+
+<section class="page-wrap">
+
+  <!-- ── TIER: ACTIVE ── -->
+  <div class="t-active">
+    <div class="tier-header">
+      <span class="dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></span>
+      <span class="name">Active · In Development</span>
+      <span class="line"></span>
+    </div>
+    <div class="build-list">
+
+      <!-- IndieLaunchKit -->
+      <div class="build-card">
+        <div class="build-head">
+          <div class="build-title-row">
+            <span class="build-icon">🚀</span>
+            <span class="build-title">INDIELAUNCHKIT</span>
+          </div>
+          <span class="build-status">In Development</span>
+        </div>
+        <div class="build-genre">Tauri 2 · Desktop · itch.io Publish-Assist</div>
+        <p class="build-desc">A Windows-native desktop app for indie devs: paste your itch.io URL → get a 10/10-ready page in 15 minutes. Filled fields, asset spec, layout, and rubric scoring. v1 is publish-assist only; marketing-assist follows in v2.</p>
+        <p class="build-desc">Bundles its own AI — no Ollama install required. Embedded llama.cpp runs a Qwen 2.5 7B model packaged inside the binary. Local SQLite for profiles. Zero server inference cost.</p>
+        <div class="build-chips">
+          <span class="chip">Tauri 2</span>
+          <span class="chip">Rust</span>
+          <span class="chip">Svelte + TS</span>
+          <span class="chip">llama.cpp</span>
+          <span class="chip">Qwen 2.5 7B</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">Windows</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── TIER: SHIPPED ── -->
+  <div class="t-shipped">
+    <div class="tier-header">
+      <span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span>
+      <span class="name">Shipped · Personal Infra</span>
+      <span class="line"></span>
+    </div>
+    <div class="build-list">
+
+      <!-- O.R.A.C.L.E -->
+      <div class="build-card">
+        <div class="build-head">
+          <div class="build-title-row">
+            <span class="build-icon">🤖</span>
+            <span class="build-title">O.R.A.C.L.E</span>
+          </div>
+          <span class="build-status">Shipped · Personal Use</span>
+        </div>
+        <div class="build-genre">Telegram Bot · Local LLM · Memory + Scheduler</div>
+        <p class="build-desc">A personal Telegram bot wired to a local LLM with persistent memory, scheduled tasks, and research scraping (Reddit, RSS, web). Single-user, whitelist-gated — built as personal infrastructure, not a shipped product.</p>
+        <div class="build-chips">
+          <span class="chip">Python</span>
+          <span class="chip">Ollama (qwen3-coder:30b)</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">APScheduler</span>
+          <span class="chip">python-telegram-bot</span>
+          <span class="chip">PRAW</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── TIER: SHELVED ── -->
+  <div class="t-shelved">
+    <div class="tier-header">
+      <span class="dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold)"></span>
+      <span class="name">Shelved · Built, No Revenue Path</span>
+      <span class="line"></span>
+    </div>
+    <div class="build-list">
+
+      <!-- Debatable -->
+      <div class="build-card">
+        <div class="build-head">
+          <div class="build-title-row">
+            <span class="build-icon">🎙️</span>
+            <span class="build-title">DEBATABLE</span>
+          </div>
+          <span class="build-status">Shelved</span>
+        </div>
+        <div class="build-genre">Local AI Pipeline · Multi-Agent Debate · Video Reels</div>
+        <p class="build-desc">An autonomous pipeline that takes one topic, runs a 4-agent debate (LOGOS / PATHOS / ETHOS / KAIROS) plus a JUDGE, and renders the result as a 1080p short-form video reel. End-to-end working pipeline — fully local, zero cloud cost.</p>
+        <p class="build-desc">Shelved — built for fun, no commercial leverage found.</p>
+        <div class="build-chips">
+          <span class="chip">Python</span>
+          <span class="chip">Ollama (qwen3)</span>
+          <span class="chip">Kokoro TTS</span>
+          <span class="chip">MoviePy</span>
+          <span class="chip">FFmpeg</span>
+          <span class="chip">Multi-Agent</span>
+        </div>
+      </div>
+
+      <!-- DevStudio -->
+      <div class="build-card">
+        <div class="build-head">
+          <div class="build-title-row">
+            <span class="build-icon">🎬</span>
+            <span class="build-title">DEVSTUDIO</span>
+          </div>
+          <span class="build-status">Shelved</span>
+        </div>
+        <div class="build-genre">Desktop App · 25 Specialist AI Agents · Local LLM</div>
+        <p class="build-desc">A Tkinter desktop app where 25 specialist AI agents (Game Designer, Programmer, Narrative Designer, Monetisation Strategist, etc.) collaborate on game-dev tasks via Studios (multi-agent rooms), Offices (1-on-1), and Briefs. All local via Ollama.</p>
+        <p class="build-desc">Shelved — never produced a publishable artifact, and a Phase-1 rebuild (router + tool layer) wasn't worth the lift without commercial pull.</p>
+        <div class="build-chips">
+          <span class="chip">Python</span>
+          <span class="chip">CustomTkinter</span>
+          <span class="chip">Ollama (qwen3:8b)</span>
+          <span class="chip">Multi-Agent</span>
+        </div>
+      </div>
+
+      <!-- GamePulse -->
+      <div class="build-card">
+        <div class="build-head">
+          <div class="build-title-row">
+            <span class="build-icon">🌐</span>
+            <span class="build-title">GAMEPULSE</span>
+          </div>
+          <span class="build-status">Shelved</span>
+        </div>
+        <div class="build-genre">Web App · Multi-Agent Studio · Cloud LLM</div>
+        <p class="build-desc">A web-hosted version of the multi-agent studio idea. Flask backend with SSE streaming + Groq (llama3-70b), Supabase auth (Email / Google / GitHub OAuth), React + Vite frontend, deployed on Render and Vercel. Ran as a free open beta.</p>
+        <p class="build-desc">Shelved — same reason as DevStudio: no path to sustainable revenue, no commercial leverage found.</p>
+        <div class="build-chips">
+          <span class="chip">Flask</span>
+          <span class="chip">React + Vite</span>
+          <span class="chip">Supabase</span>
+          <span class="chip">Groq (llama3-70b)</span>
+          <span class="chip">Render</span>
+          <span class="chip">Vercel</span>
+          <span class="chip">OAuth</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── TIER: CONCEPTS ── -->
+  <div class="t-concept">
+    <div class="tier-header">
+      <span class="dot" style="background:var(--text2)"></span>
+      <span class="name">Concepts · PRD Done, Not Built</span>
+      <span class="line"></span>
+    </div>
+    <div class="build-list">
+
+      <!-- Cal -->
+      <div class="build-card">
+        <div class="build-head">
+          <div class="build-title-row">
+            <span class="build-icon">📅</span>
+            <span class="build-title">CAL</span>
+          </div>
+          <span class="build-status">Concept · PRD Done</span>
+        </div>
+        <div class="build-genre">Web App · Multi-Calendar Utility</div>
+        <p class="build-desc">A personal utility supporting Gregorian, Hijri, and Gujarati calendars in one interface. Hijri conversion built around a Julian Day Number algorithm for accuracy. localStorage persistence. PRD complete, build pending.</p>
+        <div class="build-chips">
+          <span class="chip">HTML</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Calendar Systems</span>
+          <span class="chip">Product Design</span>
+        </div>
+      </div>
+
+      <!-- Mountain Gazette -->
+      <div class="build-card">
+        <div class="build-head">
+          <div class="build-title-row">
+            <span class="build-icon">📰</span>
+            <span class="build-title">MOUNTAIN GAZETTE <span style="color:var(--text3);font-size:0.7rem;font-weight:400;">(name TBD)</span></span>
+          </div>
+          <span class="build-status">Concept · PRD Done</span>
+        </div>
+        <div class="build-genre">Game Prototype · Local LLM in Unreal · In-Game Newspaper</div>
+        <p class="build-desc">A game prototype where a local LLM generates a living in-game newspaper. llama.cpp embedded as a static library inside Unreal Engine. PRD and a full dev checklist complete. Not yet started.</p>
+        <div class="build-chips">
+          <span class="chip">Unreal Engine</span>
+          <span class="chip">C++</span>
+          <span class="chip">llama.cpp</span>
+          <span class="chip">Local AI</span>
+          <span class="chip">Game Design</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-left">©2026 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

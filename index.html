@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hatim Jamali — Game Designer</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── HERO ── */
+.hero {
+  min-height: 88vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 2.5rem 4rem;
+  max-width: 1200px; margin: 0 auto;
+  position: relative;
+}
+.hero-deco {
+  position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+  opacity: 0.05; font-size: 20rem;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--cyan);
+  pointer-events: none; user-select: none; line-height: 1;
+}
+.hero-eyebrow {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.72rem;
+  color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--cyan); }
+.hero h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 700;
+  line-height: 0.95; letter-spacing: 0.04em; color: var(--white);
+  text-shadow: 0 0 60px rgba(0,200,255,0.15); margin-bottom: 0.3rem;
+}
+.hero h1 em {
+  font-style: normal; color: var(--cyan);
+  text-shadow: 0 0 32px rgba(0,229,255,0.55);
+  position: relative;
+}
+.hero h1 em::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--magenta), transparent);
+  box-shadow: 0 0 10px rgba(255,44,180,0.5);
+  opacity: 0.7;
+}
+.hero h1 .cursor {
+  display: inline-block; color: var(--cyan); font-style: normal;
+  font-size: 0.6em; vertical-align: 18%; margin-left: 0.15em;
+  animation: blink-cursor 1s steps(2) infinite;
+  text-shadow: 0 0 10px rgba(0,229,255,0.7);
+}
+@keyframes blink-cursor { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+/* System bar */
+.sys-bar {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text2);
+  margin-bottom: 1.6rem;
+}
+.sys-cell {
+  padding: 0.35rem 0.7rem; border: 1px solid var(--border2);
+  background: rgba(13,21,37,0.7);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+.sys-cell .sys-k {
+  color: var(--cyan); font-size: 0.92em; opacity: 0.75;
+  border-right: 1px solid var(--cyan-dim); padding-right: 0.5rem;
+}
+.sys-cell.sys-ok { color: var(--green); border-color: rgba(48,224,144,0.35); }
+.sys-cell .dot-blink {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 6px var(--green); animation: blink 2s ease infinite;
+}
+
+.role-mag { color: var(--magenta); text-shadow: 0 0 8px rgba(255,44,180,0.4); }
+
+/* HUD panel wrap */
+.hud-panel {
+  position: relative;
+  border: 1px solid var(--border2);
+  background: linear-gradient(180deg, rgba(0,229,255,0.025), transparent 40%), var(--panel);
+  padding: 1.4rem 1.4rem 1.6rem;
+  margin-bottom: 2.5rem;
+  clip-path: polygon(0 14px, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+.hud-panel-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  color: var(--cyan); letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 1rem; opacity: 0.85;
+}
+.hud-panel-label::before {
+  content: ''; display: inline-block; width: 14px; height: 1px;
+  background: var(--cyan); vertical-align: middle; margin-right: 0.5rem;
+  box-shadow: 0 0 4px var(--cyan);
+}
+.hero-role {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.78rem;
+  color: var(--text2); letter-spacing: 0.15em; margin: 1.2rem 0 1.8rem;
+  text-transform: uppercase;
+}
+.hero-role span { color: var(--cyan2); }
+.hero-bio {
+  max-width: 520px; font-size: 1rem; line-height: 1.8;
+  color: var(--text2); margin-bottom: 2.5rem;
+}
+
+/* Stat bars */
+.hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.stat { min-width: 150px; }
+.stat-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 0.4rem; display: flex; justify-content: space-between;
+}
+.stat-label span { color: var(--cyan); }
+.stat-bar { height: 3px; background: var(--panel2); border: 1px solid var(--border); overflow: hidden; }
+.stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan2), var(--cyan));
+  box-shadow: 0 0 8px var(--cyan2);
+  animation: fillIn 1.6s ease forwards; width: 0;
+}
+@keyframes fillIn { to { width: var(--w); } }
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.xp-badge {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  color: var(--gold); border: 1px solid rgba(240,192,64,0.35);
+  padding: 0.3rem 0.8rem; background: rgba(240,192,64,0.06); letter-spacing: 0.1em;
+  animation: floatBadge 3s ease-in-out infinite;
+}
+.xp-badge::before { content: '⭐ '; }
+@keyframes floatBadge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+/* ── FEATURED WORK STRIP ── */
+.featured-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+  margin-top: 1rem;
+}
+.feat-card {
+  background: var(--panel);
+  padding: 1.8rem; display: flex; flex-direction: column; gap: 0.8rem;
+  text-decoration: none; color: inherit;
+  transition: background var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+  position: relative; overflow: hidden;
+}
+/* HUD corner brackets */
+.feat-card::before {
+  content: '';
+  position: absolute; top: 6px; left: 6px;
+  width: 10px; height: 10px;
+  border-top: 1px solid var(--cyan-dim);
+  border-left: 1px solid var(--cyan-dim);
+  transition: border-color var(--t-base) var(--ease), width var(--t-base) var(--ease), height var(--t-base) var(--ease);
+}
+.feat-card::after {
+  content: ''; position: absolute; bottom: 6px; right: 6px;
+  width: 10px; height: 10px;
+  border-bottom: 1px solid var(--magenta-dim);
+  border-right: 1px solid var(--magenta-dim);
+  transition: border-color var(--t-base) var(--ease), width var(--t-base) var(--ease), height var(--t-base) var(--ease);
+}
+.feat-card:hover {
+  background: var(--panel2);
+  box-shadow: inset 0 0 0 1px var(--cyan-dim), 0 8px 30px rgba(0,229,255,0.08);
+}
+.feat-card:hover::before { border-color: var(--cyan); width: 14px; height: 14px; }
+.feat-card:hover::after  { border-color: var(--magenta); width: 14px; height: 14px; }
+/* bottom accent line */
+.feat-card .feat-arrow::after {
+  content: ''; display: block; margin-top: 0.4rem; height: 1px; width: 40px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+  transition: width var(--t-base) var(--ease);
+}
+.feat-card:hover .feat-arrow::after { width: 100%; }
+.feat-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.feat-label::before { content: ''; width: 16px; height: 1px; background: var(--border2); }
+.feat-icon { font-size: 1.8rem; }
+.feat-title {
+  font-family: 'Rajdhani', sans-serif; font-size: 1.15rem;
+  font-weight: 700; color: var(--white); letter-spacing: 0.05em;
+}
+.feat-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.6; flex: 1; }
+.feat-arrow {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  color: var(--cyan); letter-spacing: 0.1em; margin-top: 0.5rem;
+}
+
+/* ── ABOUT STRIP ── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+}
+.about-text { font-size: 0.95rem; line-height: 1.8; color: var(--text2); }
+.about-text p + p { margin-top: 1rem; }
+.about-text strong { color: var(--text); }
+.skills-wrap { display: flex; flex-direction: column; gap: 0.6rem; }
+.skill-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--panel); border: 1px solid var(--border);
+}
+.skill-row-icon { font-size: 1rem; width: 24px; text-align: center; flex-shrink: 0; }
+.skill-row-name {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  color: var(--text2); letter-spacing: 0.08em; flex: 1;
+}
+.skill-row-bar { width: 80px; height: 3px; background: var(--border); overflow: hidden; }
+.skill-row-fill {
+  height: 100%; background: linear-gradient(90deg, var(--cyan2), var(--cyan));
+  box-shadow: 0 0 6px var(--cyan2);
+  animation: fillIn 1.4s ease forwards; width: 0;
+}
+
+@media(max-width:720px){
+  .hero{padding:3rem 1.2rem 3rem; min-height:auto}
+  .hero-deco{display:none}
+  .featured-strip{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .sys-bar{font-size:0.55rem;gap:0.4rem}
+  .sys-cell{padding:0.3rem 0.55rem}
+  .hud-panel{padding:1.1rem 1rem 1.3rem}
+  .hero-stats{gap:1rem}
+  .stat{min-width:130px}
+}
+
+/* Shipped-game card (mirrors projects.html .proj-* styles) */
+.proj-list{display:flex;flex-direction:column;gap:2rem;margin-top:1rem}
+.proj-card{background:var(--panel);border:1px solid var(--border);overflow:hidden;position:relative;transition:border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);}
+.proj-card:hover{border-color:var(--cyan-dim);box-shadow:0 8px 32px rgba(0,229,255,0.08), inset 0 0 0 1px rgba(0,229,255,0.15);}
+.proj-card::before, .proj-card::after{content:'';position:absolute;width:14px;height:14px;pointer-events:none;transition:border-color var(--t-base) var(--ease);}
+.proj-card::before{top:6px;left:6px;border-top:1px solid var(--cyan-dim);border-left:1px solid var(--cyan-dim);}
+.proj-card::after{bottom:6px;right:6px;border-bottom:1px solid var(--magenta-dim);border-right:1px solid var(--magenta-dim);}
+.proj-card:hover::before{border-color:var(--cyan);}
+.proj-card:hover::after{border-color:var(--magenta);}
+.proj-card-inner{display:grid;grid-template-columns:1fr 1fr;min-height:340px}
+.proj-media{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;}
+.vid-frame{width:100%;aspect-ratio:16/9;background:var(--bg);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.thumb-row{display:flex;gap:1px;background:var(--border)}
+.thumb{flex:1;aspect-ratio:16/9;background:var(--bg);overflow:hidden;cursor:pointer;transition:opacity 0.2s}
+.thumb:hover{opacity:0.8}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.proj-info{padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.proj-num{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text3);letter-spacing:0.15em}
+.proj-icon-title{display:flex;align-items:center;gap:0.8rem}
+.proj-game-icon{font-size:1.8rem}
+.proj-title{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;color:var(--white);letter-spacing:0.04em}
+.proj-genre{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.4rem}
+.proj-genre::before{content:'';width:8px;height:1px;background:var(--cyan2);display:inline-block}
+.proj-desc{font-size:0.87rem;color:var(--text2);line-height:1.75;flex:1}
+.proj-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.proj-roles{display:flex;flex-direction:column;gap:0.3rem}
+.role-item{font-size:0.8rem;color:var(--text2);display:flex;gap:0.5rem;align-items:flex-start}
+.role-item::before{content:'▸';color:var(--cyan2);flex-shrink:0}
+.proj-btns{display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:auto}
+@media(max-width:900px){
+  .proj-card-inner{grid-template-columns:1fr}
+  .proj-media{border-right:none;border-bottom:1px solid var(--border)}
+}
+
+/* ── EXPERIENCE ── */
+.xp-list{display:flex;flex-direction:column;gap:1.5rem;margin-top:1rem}
+.xp-card{position:relative;background:var(--panel);border:1px solid var(--border);padding:1.8rem 2rem;transition:border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);}
+.xp-card:hover{border-color:var(--cyan-dim);box-shadow:0 8px 32px rgba(0,229,255,0.08), inset 0 0 0 1px rgba(0,229,255,0.15);}
+.xp-card::before, .xp-card::after{content:'';position:absolute;width:14px;height:14px;pointer-events:none;transition:border-color var(--t-base) var(--ease);}
+.xp-card::before{top:6px;left:6px;border-top:1px solid var(--cyan-dim);border-left:1px solid var(--cyan-dim);}
+.xp-card::after{bottom:6px;right:6px;border-bottom:1px solid var(--magenta-dim);border-right:1px solid var(--magenta-dim);}
+.xp-card:hover::before{border-color:var(--cyan);}
+.xp-card:hover::after{border-color:var(--magenta);}
+.xp-meta{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;margin-bottom:0.8rem}
+.xp-meta .xp-first{color:var(--gold);border:1px solid rgba(240,192,64,0.35);padding:0.15rem 0.55rem;background:rgba(240,192,64,0.06)}
+.xp-role-line{display:flex;align-items:center;gap:0.8rem;margin-bottom:0.35rem}
+.xp-role-icon{font-size:1.6rem}
+.xp-role{font-family:'Rajdhani',sans-serif;font-size:1.45rem;font-weight:700;color:var(--white);letter-spacing:0.04em}
+.xp-company{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.4rem}
+.xp-company::before{content:'';width:8px;height:1px;background:var(--cyan2);display:inline-block}
+.xp-bullets{display:flex;flex-direction:column;gap:0.4rem}
+.xp-bullets .role-item{font-size:0.85rem}
+@media(max-width:720px){.xp-card{padding:1.3rem 1.2rem}}
+</style>
+</head>
+<body>
+<div class="crt-overlay"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html">H<span>H</span>J</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="breakdowns.html">Breakdowns</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="art.html">3D Art</a></li>
+    <li><a href="builds.html">Builds</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+  </ul>
+  <div class="nav-status">Open To Work</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-deco">HHJ</div>
+
+  <!-- Terminal status bar -->
+  <div class="sys-bar">
+    <span class="sys-cell"><span class="sys-k">SYS://</span>PORTFOLIO.v3</span>
+    <span class="sys-cell"><span class="sys-k">IDENT</span>HATIM_JAMALI.exe</span>
+    <span class="sys-cell"><span class="sys-k">LOC</span>VASAI · IND</span>
+    <span class="sys-cell sys-ok"><span class="dot-blink"></span>STATUS: ONLINE</span>
+  </div>
+
+  <div class="hero-eyebrow">// Game Design Portfolio — v3.0 // Online</div>
+  <h1>HATIM<br><em>JAMALI</em><span class="cursor">_</span></h1>
+  <div class="hero-role">
+    <span>Game Designer</span> · Indie Developer · Systems Designer · 3D Environment Artist · <span class="role-mag">Gamedev Tools Builder</span>
+  </div>
+  <p class="hero-bio">
+    Passionate about systems design, player psychology, and crafting game experiences that keep players engaged. I analyse how great games work — and design new ones that do too.
+  </p>
+
+  <!-- Stat panel -->
+  <div class="hud-panel">
+    <div class="hud-panel-label">// CORE.STATS</div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-label">▸ Systems Design <span>92</span></div>
+        <div class="stat-bar"><div class="stat-fill" style="--w:92%"></div></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">▸ Level Design <span>85</span></div>
+        <div class="stat-bar"><div class="stat-fill" style="--w:85%; animation-delay:0.2s"></div></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">▸ 3D Art <span>78</span></div>
+        <div class="stat-bar"><div class="stat-fill" style="--w:78%; animation-delay:0.4s"></div></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">▸ Monetization Analysis <span>88</span></div>
+        <div class="stat-bar"><div class="stat-fill" style="--w:88%; animation-delay:0.6s"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-btns">
+    <a href="breakdowns.html" class="btn btn-primary">▶ VIEW BREAKDOWNS</a>
+    <a href="projects.html" class="btn btn-ghost">MY PROJECTS</a>
+    <a href="builds.html" class="btn btn-mag">⚙ BUILDS</a>
+    <a href="cv.html" target="_blank" rel="noopener" class="btn btn-gold">👁 VIEW CV</a>
+    <span class="xp-badge">Available for Roles</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FEATURED WORK -->
+<section class="page-wrap">
+  <div class="sec-header">
+    <div class="sec-num">FEATURED</div>
+    <div class="sec-title">WHAT I DO</div>
+    <div class="sec-icon">🎮</div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="featured-strip">
+    <a href="breakdowns.html" class="feat-card reveal">
+      <div class="feat-label">Analysis Work</div>
+      <div class="feat-icon">📊</div>
+      <div class="feat-title">Game Design Breakdowns</div>
+      <div class="feat-desc">In-depth analyses of how top mobile games monetise players using psychology, progression design, and behavioural conditioning.</div>
+      <div class="feat-arrow">VIEW BREAKDOWNS →</div>
+    </a>
+    <a href="projects.html" class="feat-card reveal">
+      <div class="feat-label">Built Projects</div>
+      <div class="feat-icon">🕹️</div>
+      <div class="feat-title">Worked-On Games</div>
+      <div class="feat-desc">From a solo-developed mobile idle sim (Silk.inc) to a networked 2v2 Unreal Engine shooter — games I designed, prototyped, and iterated on.</div>
+      <div class="feat-arrow">VIEW PROJECTS →</div>
+    </a>
+    <a href="art.html" class="feat-card reveal">
+      <div class="feat-label">Visual Work</div>
+      <div class="feat-icon">🎨</div>
+      <div class="feat-title">3D Art & Environments</div>
+      <div class="feat-desc">Game-ready 3D assets and atmospheric environment renders built in Blender, Maya, and Substance Painter.</div>
+      <div class="feat-arrow">VIEW ART →</div>
+    </a>
+    <a href="builds.html" class="feat-card reveal">
+      <div class="feat-label">Tools & AI</div>
+      <div class="feat-icon">⚙️</div>
+      <div class="feat-title">Gamedev Tools & AI Builds</div>
+      <div class="feat-desc">Self-contained tools and AI experiments for indie devs — IndieLaunchKit (itch.io publish-assist), shipped personal infra, and shelved explorations.</div>
+      <div class="feat-arrow">VIEW BUILDS →</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="page-wrap">
+  <div class="sec-header">
+    <div class="sec-num">ABOUT</div>
+    <div class="sec-title">WHO I AM</div>
+    <div class="sec-icon">👾</div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I am a <strong>game designer</strong> who thrives on planning and detailing game experiences. My primary focus is designing immersive worlds and refining gameplay elements to ensure an engaging player journey.</p>
+      <p>I specialise in <strong>systems design, monetisation analysis, and conceptual development</strong> — understanding not just how to build a game, but why players keep coming back.</p>
+      <p>While I have experience with scripting for prototyping, my expertise lies in designing <strong>gameplay flow, mechanics, and player experience</strong> rather than programming. My goal is to create games that are well-balanced, visually compelling, and strategically engaging.</p>
+      <div style="margin-top:1.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="mailto:hatimhjamali@gmail.com" class="btn btn-ghost">✉ EMAIL ME</a>
+        <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank" class="btn btn-ghost">🔗 LINKEDIN</a>
+      </div>
+    </div>
+    <div class="skills-wrap reveal">
+      <div class="skill-row"><span class="skill-row-icon">🎮</span><span class="skill-row-name">Unreal Engine</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:88%"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🎮</span><span class="skill-row-name">Unity</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:82%; animation-delay:0.1s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🧊</span><span class="skill-row-name">Blender</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:80%; animation-delay:0.2s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🎨</span><span class="skill-row-name">Substance Painter</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:75%; animation-delay:0.3s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">📋</span><span class="skill-row-name">GDD Writing</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:90%; animation-delay:0.4s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">📊</span><span class="skill-row-name">Monetization Analysis</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:88%; animation-delay:0.5s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🧠</span><span class="skill-row-name">Player Psychology</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:85%; animation-delay:0.6s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🗺️</span><span class="skill-row-name">Level Design</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:85%; animation-delay:0.7s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🤖</span><span class="skill-row-name">ComfyUI — AI Image & Animation</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:55%; animation-delay:0.8s"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SHIPPED GAME -->
+<section class="page-wrap">
+  <div class="sec-header">
+    <div class="sec-num">SHIPPED</div>
+    <div class="sec-title">PUBLISHED GAME</div>
+    <div class="sec-icon">📰</div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="proj-list">
+    <div class="proj-card reveal">
+      <div class="proj-card-inner">
+        <div class="proj-media">
+          <div class="vid-frame" style="aspect-ratio:16/9;background:var(--bg);overflow:hidden;">
+            <img id="wtt-hero-home" src="wtt-cover.png" alt="The Wasted Times — cover" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+          <div class="thumb-row">
+            <div class="thumb" onclick="document.getElementById('wtt-hero-home').src='wtt-1.png'" style="padding:0;overflow:hidden;">
+              <img src="wtt-1.png" alt="Screenshot 1"/>
+            </div>
+            <div class="thumb" onclick="document.getElementById('wtt-hero-home').src='wtt-4.png'" style="padding:0;overflow:hidden;">
+              <img src="wtt-4.png" alt="Screenshot 2"/>
+            </div>
+            <div class="thumb" onclick="document.getElementById('wtt-hero-home').src='wtt-7.png'" style="padding:0;overflow:hidden;">
+              <img src="wtt-7.png" alt="Screenshot 3"/>
+            </div>
+          </div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-num">PROJECT · 001 · <span style="color:var(--green);">SHIPPED · MAY 2026</span></div>
+          <div class="proj-icon-title">
+            <span class="proj-game-icon">📰</span>
+            <span class="proj-title">THE WASTED TIMES</span>
+          </div>
+          <div class="proj-genre">Unity 6 · Blind-Typing Comedy · itch.io</div>
+          <p class="proj-desc">A solo-developed comedic typing game, shipped end-to-end on itch.io. Players type letters as they appear — without knowing what they're spelling — and when the timer stops, the game reveals the sentence and roasts the player for it. Three difficulty levels, customisable timer, ragtime soundtrack, and a 1920s newspaper aesthetic.</p>
+          <div class="proj-roles">
+            <div class="role-item">Solo development — concept, design, code, art, audio, publish</div>
+            <div class="role-item">Designed the blind-input → reveal → roast loop and three-tier difficulty system</div>
+            <div class="role-item">Authored the itch.io page and v1.2 devlog end-to-end</div>
+          </div>
+          <div class="proj-chips">
+            <span class="chip">Unity 6</span>
+            <span class="chip">C#</span>
+            <span class="chip">TextMeshPro</span>
+            <span class="chip">Solo Dev</span>
+            <span class="chip">itch.io</span>
+            <span class="chip">Shipped</span>
+          </div>
+          <div class="proj-btns">
+            <a href="https://hatimhj.itch.io/the-wasted-times" target="_blank" class="btn btn-primary">▶ PLAY ON ITCH.IO</a>
+            <a href="https://hatimhj.itch.io/the-wasted-times/devlog/1523863/v12-the-wasted-times-properly" target="_blank" class="btn btn-ghost">📜 READ DEVLOG</a>
+            <a href="projects.html" class="btn btn-ghost">ALL PROJECTS →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section class="page-wrap" id="experience" style="scroll-margin-top:90px;">
+  <div class="sec-header">
+    <div class="sec-num">EXPERIENCE</div>
+    <div class="sec-title">WORK HISTORY</div>
+    <div class="sec-icon">🎲</div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="xp-list">
+    <div class="xp-card reveal">
+      <div class="xp-meta">
+        <span class="xp-first">First Formal Role</span>
+        <span>Apr 2026 – May 2026</span>
+        <span>· Part-Time</span>
+        <span>· Borivali, Mumbai · IND</span>
+      </div>
+      <div class="xp-role-line">
+        <span class="xp-role-icon">🎲</span>
+        <span class="xp-role">Store &amp; Inventory Manager</span>
+      </div>
+      <div class="xp-company">Base &amp; Bloom — Community Board-Game Space</div>
+      <div class="xp-bullets">
+        <div class="role-item">Ran storefront operations and managed the board-game inventory for a community game space.</div>
+        <div class="role-item">Hosted regular board-game nights, onboarding groups of strangers and regulars into new games.</div>
+        <div class="role-item">Handled stock management and day-to-day customer-facing operations.</div>
+        <div class="role-item">Studied game mechanics across a wide range of unfamiliar board and card games — sharpening my eye for systems and player onboarding.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">©2026 HATIM JAMALI · GAME DESIGNER</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
+    <a href="mailto:hatimhjamali@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
