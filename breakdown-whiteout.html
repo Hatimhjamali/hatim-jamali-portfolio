@@ -11,14 +11,14 @@
   display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;
 }
 .doc-back {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.81rem;
   color: var(--text2); text-decoration: none; letter-spacing: 0.12em;
   display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;
   transition: color 0.2s;
 }
 .doc-back:hover { color: var(--cyan); }
 .doc-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; color: var(--white); letter-spacing: 0.04em; }
-.doc-sub { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--cyan2); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.4rem; }
+.doc-sub { font-family: 'Share Tech Mono', monospace; font-size: 0.86rem; color: var(--cyan2); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.4rem; }
 .doc-icon { font-size: 4rem; opacity: 0.8; }
 
 /* META STRIP */
@@ -29,7 +29,7 @@
 .meta-cell {
   flex: 1; padding: 1rem 1.2rem; background: var(--panel);
 }
-.meta-label { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.meta-label { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
 .meta-val { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--white); letter-spacing: 0.04em; }
 
 /* DOC LAYOUT */
@@ -62,10 +62,10 @@
 }
 .loop-node {
   padding: 0.4rem 0.8rem; border: 1px solid var(--border2); background: var(--panel);
-  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; color: var(--text2); letter-spacing: 0.08em;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text2); letter-spacing: 0.08em;
 }
 .loop-node.highlight { border-color: var(--cyan); color: var(--cyan); background: rgba(0,200,255,0.06); }
-.loop-arr { color: var(--cyan2); font-size: 0.7rem; }
+.loop-arr { color: var(--cyan2); font-size: 0.86rem; }
 
 /* INSIGHT LIST */
 .insight-list { display: flex; flex-direction: column; gap: 0.8rem; }
@@ -76,19 +76,19 @@
 }
 .insight-entry.gold { border-left-color: var(--gold); }
 .insight-entry.red { border-left-color: var(--red); }
-.insight-num { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--cyan2); flex-shrink: 0; margin-top: 0.15rem; }
+.insight-num { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--cyan2); flex-shrink: 0; margin-top: 0.15rem; }
 .insight-text { font-size: 0.85rem; line-height: 1.65; color: var(--text2); }
 .insight-text strong { color: var(--text); }
 
 /* SIDEBAR WIDGETS */
 .sidebar-card { background: var(--panel); border: 1px solid var(--border); }
-.sidebar-header { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); background: var(--panel2); font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--cyan); letter-spacing: 0.15em; text-transform: uppercase; }
+.sidebar-header { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); background: var(--panel2); font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--cyan); letter-spacing: 0.15em; text-transform: uppercase; }
 .sidebar-body { padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
 .sidebar-item { font-size: 0.8rem; color: var(--text2); line-height: 1.5; padding: 0.4rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; }
 .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
 .sidebar-item::before { content: '▸'; color: var(--cyan2); flex-shrink: 0; }
 .rating-row { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; }
-.rating-label { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--text3); letter-spacing: 0.1em; }
+.rating-label { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text3); letter-spacing: 0.1em; }
 .rating-dots { display: flex; gap: 3px; }
 
 @media(max-width:900px){
@@ -112,7 +112,6 @@
     <li><a href="breakdowns.html">Breakdowns</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="art.html">3D Art</a></li>
-    <li><a href="builds.html">Builds</a></li>
     <li><a href="index.html#experience">Experience</a></li>
   </ul>
   <div class="nav-status">Open To Work</div>
@@ -262,6 +261,7 @@
 <footer>
   <div class="footer-left">©2026 HATIM JAMALI · GAME DESIGNER</div>
   <div class="footer-links">
+    <a href="tools.html">Other work: tools &amp; systems</a>
     <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
     <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
     <a href="mailto:hatimhjamali@gmail.com">Email</a>

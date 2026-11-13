@@ -21,7 +21,7 @@
   pointer-events: none; user-select: none; line-height: 1;
 }
 .hero-eyebrow {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.72rem;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.88rem;
   color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase;
   display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;
 }
@@ -43,91 +43,36 @@
   box-shadow: 0 0 10px rgba(255,44,180,0.5);
   opacity: 0.7;
 }
-.hero h1 .cursor {
-  display: inline-block; color: var(--cyan); font-style: normal;
-  font-size: 0.6em; vertical-align: 18%; margin-left: 0.15em;
-  animation: blink-cursor 1s steps(2) infinite;
-  text-shadow: 0 0 10px rgba(0,229,255,0.7);
-}
-@keyframes blink-cursor { 0%,49%{opacity:1} 50%,100%{opacity:0} }
-
-/* System bar */
-.sys-bar {
-  display: flex; flex-wrap: wrap; gap: 0.6rem;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--text2);
-  margin-bottom: 1.6rem;
-}
-.sys-cell {
-  padding: 0.35rem 0.7rem; border: 1px solid var(--border2);
-  background: rgba(13,21,37,0.7);
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
-}
-.sys-cell .sys-k {
-  color: var(--cyan); font-size: 0.92em; opacity: 0.75;
-  border-right: 1px solid var(--cyan-dim); padding-right: 0.5rem;
-}
-.sys-cell.sys-ok { color: var(--green); border-color: rgba(48,224,144,0.35); }
-.sys-cell .dot-blink {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
-  box-shadow: 0 0 6px var(--green); animation: blink 2s ease infinite;
-}
-
-.role-mag { color: var(--magenta); text-shadow: 0 0 8px rgba(255,44,180,0.4); }
-
-/* HUD panel wrap */
-.hud-panel {
-  position: relative;
-  border: 1px solid var(--border2);
-  background: linear-gradient(180deg, rgba(0,229,255,0.025), transparent 40%), var(--panel);
-  padding: 1.4rem 1.4rem 1.6rem;
-  margin-bottom: 2.5rem;
-  clip-path: polygon(0 14px, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
-}
-.hud-panel-label {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
-  color: var(--cyan); letter-spacing: 0.18em; text-transform: uppercase;
-  margin-bottom: 1rem; opacity: 0.85;
-}
-.hud-panel-label::before {
-  content: ''; display: inline-block; width: 14px; height: 1px;
-  background: var(--cyan); vertical-align: middle; margin-right: 0.5rem;
-  box-shadow: 0 0 4px var(--cyan);
-}
 .hero-role {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.78rem;
-  color: var(--text2); letter-spacing: 0.15em; margin: 1.2rem 0 1.8rem;
+  font-family: 'Rajdhani', sans-serif; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 600;
+  color: var(--cyan); letter-spacing: 0.08em; margin: 1rem 0 1.4rem;
   text-transform: uppercase;
 }
-.hero-role span { color: var(--cyan2); }
 .hero-bio {
-  max-width: 520px; font-size: 1rem; line-height: 1.8;
-  color: var(--text2); margin-bottom: 2.5rem;
+  max-width: 620px; font-size: 1.12rem; line-height: 1.75;
+  color: var(--text); margin-bottom: 2rem;
 }
 
-/* Stat bars */
-.hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-.stat { min-width: 150px; }
-.stat-label {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
-  color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase;
-  margin-bottom: 0.4rem; display: flex; justify-content: space-between;
+/* Proof strip: facts a visitor can check, each linking to the work */
+.proof-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem;
+  max-width: 900px; margin-bottom: 2.5rem;
 }
-.stat-label span { color: var(--cyan); }
-.stat-bar { height: 3px; background: var(--panel2); border: 1px solid var(--border); overflow: hidden; }
-.stat-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--cyan2), var(--cyan));
-  box-shadow: 0 0 8px var(--cyan2);
-  animation: fillIn 1.6s ease forwards; width: 0;
+.proof {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.9rem 1.1rem; text-decoration: none;
+  background: var(--panel); border: 1px solid var(--border2); border-radius: 6px;
+  transition: border-color var(--t-base) var(--ease), background var(--t-base) var(--ease);
 }
-@keyframes fillIn { to { width: var(--w); } }
-
+.proof:hover { border-color: var(--cyan); background: var(--panel2); }
+.proof strong {
+  font-family: 'Rajdhani', sans-serif; font-size: 2.4rem; font-weight: 700;
+  line-height: 1; color: var(--cyan);
+}
+.proof span { font-size: 0.92rem; line-height: 1.35; color: var(--text); }
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 .xp-badge {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;
   color: var(--gold); border: 1px solid rgba(240,192,64,0.35);
   padding: 0.3rem 0.8rem; background: rgba(240,192,64,0.06); letter-spacing: 0.1em;
   animation: floatBadge 3s ease-in-out infinite;
@@ -178,7 +123,7 @@
 }
 .feat-card:hover .feat-arrow::after { width: 100%; }
 .feat-label {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;
   color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase;
   display: flex; align-items: center; gap: 0.5rem;
 }
@@ -190,7 +135,7 @@
 }
 .feat-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.6; flex: 1; }
 .feat-arrow {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;
   color: var(--cyan); letter-spacing: 0.1em; margin-top: 0.5rem;
 }
 
@@ -209,14 +154,7 @@
 }
 .skill-row-icon { font-size: 1rem; width: 24px; text-align: center; flex-shrink: 0; }
 .skill-row-name {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
-  color: var(--text2); letter-spacing: 0.08em; flex: 1;
-}
-.skill-row-bar { width: 80px; height: 3px; background: var(--border); overflow: hidden; }
-.skill-row-fill {
-  height: 100%; background: linear-gradient(90deg, var(--cyan2), var(--cyan));
-  box-shadow: 0 0 6px var(--cyan2);
-  animation: fillIn 1.4s ease forwards; width: 0;
+  font-size: 0.98rem; color: var(--text); flex: 1;
 }
 
 @media(max-width:720px){
@@ -224,9 +162,8 @@
   .hero-deco{display:none}
   .featured-strip{grid-template-columns:1fr}
   .about-grid{grid-template-columns:1fr}
-  .sys-bar{font-size:0.55rem;gap:0.4rem}
-  .sys-cell{padding:0.3rem 0.55rem}
-  .hud-panel{padding:1.1rem 1rem 1.3rem}
+
+
   .hero-stats{gap:1rem}
   .stat{min-width:130px}
 }
@@ -248,11 +185,11 @@
 .thumb:hover{opacity:0.8}
 .thumb img{width:100%;height:100%;object-fit:cover}
 .proj-info{padding:2rem;display:flex;flex-direction:column;gap:1rem}
-.proj-num{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text3);letter-spacing:0.15em}
+.proj-num{font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--text3);letter-spacing:0.15em}
 .proj-icon-title{display:flex;align-items:center;gap:0.8rem}
 .proj-game-icon{font-size:1.8rem}
 .proj-title{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;color:var(--white);letter-spacing:0.04em}
-.proj-genre{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.4rem}
+.proj-genre{font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.4rem}
 .proj-genre::before{content:'';width:8px;height:1px;background:var(--cyan2);display:inline-block}
 .proj-desc{font-size:0.87rem;color:var(--text2);line-height:1.75;flex:1}
 .proj-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
@@ -274,12 +211,12 @@
 .xp-card::after{bottom:6px;right:6px;border-bottom:1px solid var(--magenta-dim);border-right:1px solid var(--magenta-dim);}
 .xp-card:hover::before{border-color:var(--cyan);}
 .xp-card:hover::after{border-color:var(--magenta);}
-.xp-meta{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;margin-bottom:0.8rem}
+.xp-meta{font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;margin-bottom:0.8rem}
 .xp-meta .xp-first{color:var(--gold);border:1px solid rgba(240,192,64,0.35);padding:0.15rem 0.55rem;background:rgba(240,192,64,0.06)}
 .xp-role-line{display:flex;align-items:center;gap:0.8rem;margin-bottom:0.35rem}
 .xp-role-icon{font-size:1.6rem}
 .xp-role{font-family:'Rajdhani',sans-serif;font-size:1.45rem;font-weight:700;color:var(--white);letter-spacing:0.04em}
-.xp-company{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.4rem}
+.xp-company{font-family:'Share Tech Mono',monospace;font-size:0.86rem;color:var(--cyan2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.4rem}
 .xp-company::before{content:'';width:8px;height:1px;background:var(--cyan2);display:inline-block}
 .xp-bullets{display:flex;flex-direction:column;gap:0.4rem}
 .xp-bullets .role-item{font-size:0.85rem}
@@ -296,7 +233,6 @@
     <li><a href="breakdowns.html">Breakdowns</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="art.html">3D Art</a></li>
-    <li><a href="builds.html">Builds</a></li>
     <li><a href="index.html#experience">Experience</a></li>
   </ul>
   <div class="nav-status">Open To Work</div>
@@ -306,51 +242,24 @@
 <div class="hero">
   <div class="hero-deco">HHJ</div>
 
-  <!-- Terminal status bar -->
-  <div class="sys-bar">
-    <span class="sys-cell"><span class="sys-k">SYS://</span>PORTFOLIO.v3</span>
-    <span class="sys-cell"><span class="sys-k">IDENT</span>HATIM_JAMALI.exe</span>
-    <span class="sys-cell"><span class="sys-k">LOC</span>VASAI · IND</span>
-    <span class="sys-cell sys-ok"><span class="dot-blink"></span>STATUS: ONLINE</span>
-  </div>
-
-  <div class="hero-eyebrow">// Game Design Portfolio — v3.0 // Online</div>
-  <h1>HATIM<br><em>JAMALI</em><span class="cursor">_</span></h1>
-  <div class="hero-role">
-    <span>Game Designer</span> · Indie Developer · Systems Designer · 3D Environment Artist · <span class="role-mag">Gamedev Tools Builder</span>
-  </div>
+  <div class="hero-eyebrow">Game Design Portfolio</div>
+  <h1>HATIM<br><em>JAMALI</em></h1>
+  <div class="hero-role">Game Designer</div>
   <p class="hero-bio">
-    Passionate about systems design, player psychology, and crafting game experiences that keep players engaged. I analyse how great games work — and design new ones that do too.
+    I design game systems and study why players stay. One game shipped solo, two board games taken through playtests, and written breakdowns of how top mobile games hold their players.
   </p>
 
-  <!-- Stat panel -->
-  <div class="hud-panel">
-    <div class="hud-panel-label">// CORE.STATS</div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-label">▸ Systems Design <span>92</span></div>
-        <div class="stat-bar"><div class="stat-fill" style="--w:92%"></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">▸ Level Design <span>85</span></div>
-        <div class="stat-bar"><div class="stat-fill" style="--w:85%; animation-delay:0.2s"></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">▸ 3D Art <span>78</span></div>
-        <div class="stat-bar"><div class="stat-fill" style="--w:78%; animation-delay:0.4s"></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">▸ Monetization Analysis <span>88</span></div>
-        <div class="stat-bar"><div class="stat-fill" style="--w:88%; animation-delay:0.6s"></div></div>
-      </div>
-    </div>
+  <!-- Proof, not self-rated scores: each of these links to the work itself. -->
+  <div class="proof-row">
+    <a class="proof" href="projects.html"><strong>1</strong><span>game shipped solo on itch.io</span></a>
+    <a class="proof" href="projects.html"><strong>2</strong><span>board games designed and playtested</span></a>
+    <a class="proof" href="breakdowns.html"><strong>3</strong><span>monetisation breakdowns of live games</span></a>
+    <a class="proof" href="breakdown-silk.html"><strong>1</strong><span>full game design document</span></a>
   </div>
-
   <div class="hero-btns">
-    <a href="breakdowns.html" class="btn btn-primary">▶ VIEW BREAKDOWNS</a>
-    <a href="projects.html" class="btn btn-ghost">MY PROJECTS</a>
-    <a href="builds.html" class="btn btn-mag">⚙ BUILDS</a>
-    <a href="cv.html" target="_blank" rel="noopener" class="btn btn-gold">👁 VIEW CV</a>
+    <a href="projects.html" class="btn btn-primary">▶ SEE MY GAMES</a>
+    <a href="breakdowns.html" class="btn btn-ghost">DESIGN BREAKDOWNS</a>
+    <a href="cv.html" target="_blank" rel="noopener" class="btn btn-ghost">VIEW CV</a>
     <span class="xp-badge">Available for Roles</span>
   </div>
 </div>
@@ -374,10 +283,10 @@
       <div class="feat-arrow">VIEW BREAKDOWNS →</div>
     </a>
     <a href="projects.html" class="feat-card reveal">
-      <div class="feat-label">Built Projects</div>
+      <div class="feat-label">Design Work</div>
       <div class="feat-icon">🕹️</div>
-      <div class="feat-title">Worked-On Games</div>
-      <div class="feat-desc">From a solo-developed mobile idle sim (Silk.inc) to a networked 2v2 Unreal Engine shooter — games I designed, prototyped, and iterated on.</div>
+      <div class="feat-title">Games</div>
+      <div class="feat-desc">A shipped solo typing game, a networked 2v2 Unreal shooter, a mobile idle sim and two board games — designed, prototyped and iterated on.</div>
       <div class="feat-arrow">VIEW PROJECTS →</div>
     </a>
     <a href="art.html" class="feat-card reveal">
@@ -386,13 +295,6 @@
       <div class="feat-title">3D Art & Environments</div>
       <div class="feat-desc">Game-ready 3D assets and atmospheric environment renders built in Blender, Maya, and Substance Painter.</div>
       <div class="feat-arrow">VIEW ART →</div>
-    </a>
-    <a href="builds.html" class="feat-card reveal">
-      <div class="feat-label">Tools & AI</div>
-      <div class="feat-icon">⚙️</div>
-      <div class="feat-title">Gamedev Tools & AI Builds</div>
-      <div class="feat-desc">Self-contained tools and AI experiments for indie devs — IndieLaunchKit (itch.io publish-assist), shipped personal infra, and shelved explorations.</div>
-      <div class="feat-arrow">VIEW BUILDS →</div>
     </a>
   </div>
 </section>
@@ -418,15 +320,15 @@
       </div>
     </div>
     <div class="skills-wrap reveal">
-      <div class="skill-row"><span class="skill-row-icon">🎮</span><span class="skill-row-name">Unreal Engine</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:88%"></div></div></div>
-      <div class="skill-row"><span class="skill-row-icon">🎮</span><span class="skill-row-name">Unity</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:82%; animation-delay:0.1s"></div></div></div>
-      <div class="skill-row"><span class="skill-row-icon">🧊</span><span class="skill-row-name">Blender</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:80%; animation-delay:0.2s"></div></div></div>
-      <div class="skill-row"><span class="skill-row-icon">🎨</span><span class="skill-row-name">Substance Painter</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:75%; animation-delay:0.3s"></div></div></div>
-      <div class="skill-row"><span class="skill-row-icon">📋</span><span class="skill-row-name">GDD Writing</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:90%; animation-delay:0.4s"></div></div></div>
-      <div class="skill-row"><span class="skill-row-icon">📊</span><span class="skill-row-name">Monetization Analysis</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:88%; animation-delay:0.5s"></div></div></div>
-      <div class="skill-row"><span class="skill-row-icon">🧠</span><span class="skill-row-name">Player Psychology</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:85%; animation-delay:0.6s"></div></div></div>
-      <div class="skill-row"><span class="skill-row-icon">🗺️</span><span class="skill-row-name">Level Design</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:85%; animation-delay:0.7s"></div></div></div>
-      <div class="skill-row"><span class="skill-row-icon">🤖</span><span class="skill-row-name">ComfyUI — AI Image & Animation</span><div class="skill-row-bar"><div class="skill-row-fill" style="--w:55%; animation-delay:0.8s"></div></div></div>
+      <div class="skill-row"><span class="skill-row-icon">🎮</span><span class="skill-row-name">Unreal Engine</span></div>
+      <div class="skill-row"><span class="skill-row-icon">🎮</span><span class="skill-row-name">Unity</span></div>
+      <div class="skill-row"><span class="skill-row-icon">🧊</span><span class="skill-row-name">Blender</span></div>
+      <div class="skill-row"><span class="skill-row-icon">🎨</span><span class="skill-row-name">Substance Painter</span></div>
+      <div class="skill-row"><span class="skill-row-icon">📋</span><span class="skill-row-name">GDD Writing</span></div>
+      <div class="skill-row"><span class="skill-row-icon">📊</span><span class="skill-row-name">Monetization Analysis</span></div>
+      <div class="skill-row"><span class="skill-row-icon">🧠</span><span class="skill-row-name">Player Psychology</span></div>
+      <div class="skill-row"><span class="skill-row-icon">🗺️</span><span class="skill-row-name">Level Design</span></div>
+      <div class="skill-row"><span class="skill-row-icon">🤖</span><span class="skill-row-name">ComfyUI — AI Image & Animation</span></div>
     </div>
   </div>
 </section>
@@ -528,6 +430,7 @@
 <footer>
   <div class="footer-left">©2026 HATIM JAMALI · GAME DESIGNER</div>
   <div class="footer-links">
+    <a href="tools.html">Other work: tools &amp; systems</a>
     <a href="https://www.linkedin.com/in/hatim-jamali-510889212/" target="_blank">LinkedIn</a>
     <a href="https://www.instagram.com/hatim.h.jamali/" target="_blank">Instagram</a>
     <a href="mailto:hatimhjamali@gmail.com">Email</a>
